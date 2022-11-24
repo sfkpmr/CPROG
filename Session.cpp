@@ -16,19 +16,19 @@ namespace cwing {
 				case SDL_QUIT:
 					quit = true;
 					break;
-				case SDL_MOUSEBUTTONDOWN:
+				case SDL_MOUSEBUTTONDOWN: // kommer inte behövas??
 					//efter att ha tagit emot händelse i loopen går vi igenom alla komponent och anropar deras funktioner för 
 					//att hantera den typen av händelsen och de updaterar sig
 					for (Component* c : comps) {
 						c->mouseDown(eve);
 					}
 					break;
-				case SDL_MOUSEBUTTONUP:
+				case SDL_MOUSEBUTTONUP: // samma?
 					for (Component* c : comps) {
 						c->mouseUp(eve);
 					}
 					break;
-				case SDL_KEYDOWN:
+				case SDL_KEYDOWN: 
 					for (Component* c : comps) {
 						c->keyDown(eve);
 					}

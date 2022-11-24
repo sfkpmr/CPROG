@@ -13,11 +13,15 @@ namespace cwing {
 
 		SDL_Renderer* getRen() const;
 		TTF_Font* getFont() const;
+		int getWidth() const;
+		int getHight() const;
 
 	private:
 		SDL_Window* win;
 		SDL_Renderer* ren;
 		TTF_Font* font;
+		int width = 1000;
+		int height = 600;
 	};
 	//extern betyder att alla som inkluderar filen får deklaration om att det finns nånstans ett objekt sys av typen System
 	extern System sys;

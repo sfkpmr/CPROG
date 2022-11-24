@@ -3,12 +3,12 @@
 
 namespace cwing {
 
-#define HEIGHT 600
-#define WIDTH 1000
+//#define HEIGHT 600
+//#define WIDTH 1000
 
 	System::System() {
 		SDL_Init(SDL_INIT_EVERYTHING);
-		win = SDL_CreateWindow("CWING", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
+		win = SDL_CreateWindow("CWING", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
 		font = TTF_OpenFont("c:/Windows/Fonts/arial.ttf", 34);
@@ -28,6 +28,14 @@ namespace cwing {
 
 	TTF_Font* System::getFont() const {
 		return font;
+	}
+
+	int System::getWidth() const {
+		return width;
+	}
+
+	int System::getHight() const {
+		return height;
 	}
 
 	//eftersom objektet ligger utanför funktioner blir det ett statisk objekt och dess konstruktor kommer att köras innan programmet startar, och des när klar

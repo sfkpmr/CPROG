@@ -14,7 +14,7 @@ private:
 	SDL_Texture* texture;
 public:
 	Ball();
-	void draw() const;
+	void draw();
 	~Ball();
 };
 

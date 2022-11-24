@@ -18,16 +18,16 @@ namespace cwing {
 		virtual void mouseUp(const SDL_Event&){}
 		virtual void keyDown(const SDL_Event&){}
 		virtual void keyUp(const SDL_Event&){}
-		virtual void draw() const = 0; // abstract class, ingen generel implementering, subklasser måste definiera implementationen av draw()
-		const SDL_Rect getRect() const { return rect; }; // för att kunna ha åtkomst till rect
+		virtual void draw() = 0; // abstract class, ingen generel implementering, subklasser måste definiera implementationen av draw()
+		SDL_Rect& getRect() { return rect; }; // för att kunna ha åtkomst till rect
 	protected:
 		//konstruktorn i protected för att vi vill inte att man ska skapa objekt utav komponent klassen, den är bara en basklass till subklasser Button osv..
 		//komponenter ska ha sina koordinater och storlek
 		Component(int x, int y, int w, int h);
-		SDL_Rect rect;
 	private:
 		//SDL_Rect rect; //för att komponenter ska kunna ha sina koordinater
 		//här förbjuder vi kopiering respektive tilldelning
+		SDL_Rect rect;
 		Component(const Component&) = delete;
 		const Component& operator=(const Component&) = delete;
 	};
