@@ -4,8 +4,12 @@
 
 namespace cwing {
 
-	MovableSprite::MovableSprite(int x, int y, int w, int h): Sprite(x, y, w, h) {
+	MovableSprite::MovableSprite(int x, int y, int w, int h, int speed): Sprite(x, y, w, h), speed(speed) {
+		
+	}
 
+	int MovableSprite::getSpeed() const {
+		return speed;
 	}
 
 	void MovableSprite::draw() {
@@ -14,12 +18,9 @@ namespace cwing {
 		SDL_RenderCopy(sys.getRen(), texture, NULL, &rect);
 	}
 	
-	//const SDL_Texture& MovableSprite::getTexture() {
-	//	return *texture;
-	//}
-
+	
 	MovableSprite::~MovableSprite() {
-
+		
 	}
 }
 

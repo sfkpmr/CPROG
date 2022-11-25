@@ -18,6 +18,6 @@ namespace cwing {
 		std::vector<Sprite*> added; //innehåller objekt som adderas under iterering
 		std::vector<Sprite*> removed; //innehåller sprites som tas bort under iterering
 	};
-
+	extern Engine ge;
 }
 #endif

@@ -8,10 +8,10 @@ namespace cwing {
 
 	System::System() {
 		SDL_Init(SDL_INIT_EVERYTHING);
-		win = SDL_CreateWindow("CWING", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
+		win = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
-		font = TTF_OpenFont("c:/Windows/Fonts/arial.ttf", 34);
+		font = TTF_OpenFont("c:/Windows/Fonts/arial.ttf", 34); //FLYTTA SÖKVÄGEN TILL CONSTANTS
 	}
 
 	System::~System() {
