@@ -34,7 +34,7 @@ namespace cwing {
 		return width;
 	}
 
-	int System::getHight() const {
+	int System::getHeight() const {
 		return height;
 	}
 

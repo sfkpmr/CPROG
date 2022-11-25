@@ -2,19 +2,21 @@
 #define BALL_H
 #include <SDL.h>
 #include <SDL_image.h>
-#include "Component.h"
+#include "MovableSprite.h"
+#include "Sprite.h"
 
 namespace cwing{
 
-class Ball : public Component
+class Ball : public MovableSprite
 {
 private:
+	int x, y, w, h;
 	int speed;
 	int direction;
-	SDL_Texture* texture;
 public:
-	Ball();
-	void draw();
+	Ball(int x, int y, int w, int h);
+	void tick(){}
+	
 	~Ball();
 };
 

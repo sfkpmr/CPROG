@@ -1,7 +1,7 @@
 #include <SDL.h>
 #include <string>
-#include "Session.h"
-#include "Component.h"
+#include "Engine.h"
+#include "Sprite.h"
 #include "Ball.h"
 #include "Paddle.h"
 
@@ -10,15 +10,15 @@ using namespace cwing;
 
 
 int main(int argc, char** argv) {
-	Session ses;
+	Engine ge;
 
-	Component* ball = new Ball();
-	Component* paddle_l = new Paddle(30, 250, 20, 100);
-	Component* paddle_r = new Paddle(970, 250, 20, 100);
-	ses.add(paddle_l);
-	ses.add(paddle_r);
-	ses.add(ball);
-	ses.run();
+	Sprite* ball = new Ball(500 - 25, 300 - 25, 50, 50);
+	Sprite* paddle_l = new Paddle(30, 250, 20, 100);
+	Sprite* paddle_r = new Paddle(970, 250, 20, 100);
+	ge.add(paddle_l);
+	ge.add(paddle_r);
+	ge.add(ball);
+	ge.run();
 
 	return 0;
 }

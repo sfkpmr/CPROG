@@ -2,23 +2,24 @@
 #define PADDLE_H
 #include <SDL.h>
 #include <SDL_image.h>
-#include "Component.h"
+#include "MovableSprite.h"
 #include "System.h"
 
 namespace cwing {
-	class Paddle : public Component
+	class Paddle : public MovableSprite
 	{
 	private:
 		int x;
 		int y;
 		int width;
 		int height;
-		SDL_Texture* texture;
+		//std::string direction;
 	public:
 		Paddle(int x, int y, int width, int height);
-		void draw();
 		void keyDown(const SDL_Event&);
 		void keyUp(const SDL_Event&);
+		
+		void tick(){}
 		~Paddle();
 	};
 }

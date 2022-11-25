@@ -1,19 +1,21 @@
 #include "Paddle.h"
-#include "Component.h"
+#include "Sprite.h"
 #include "Constants.h"
 #include <SDL.h>
 #include <SDL_image.h>
 
 namespace cwing {
-	Paddle::Paddle(int x, int y, int width, int height): Component(x , y, width, height) {
+	Paddle::Paddle(int x, int y, int width, int height): MovableSprite(x , y, width, height) {
 		
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "paddle.png").c_str());
 	}
 
-	void Paddle::draw() {
-		const SDL_Rect& rect = getRect();
-		//SDL_RenderCopy(sys.ren, texture, NULL, &getRect());
-		SDL_RenderCopy(sys.getRen(), texture, NULL, &rect);
+	void Paddle::keyDown(const SDL_Event&) {
+
+	}
+
+	void Paddle::keyUp(const SDL_Event&) {
+
 	}
 
 	Paddle::~Paddle() {

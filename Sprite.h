@@ -1,13 +1,13 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef SPRITE_H
+#define SPRITE_H
 #include <SDL.h>
 
 namespace cwing {
-	class Component
+	class Sprite
 	{
 	public:
 		//virtual för att säkerställa att desktrutorer hos subklasser anropas när man tar bort ett objekt 
-		virtual ~Component();
+		virtual ~Sprite();
 		// vi har event hanterare funktioner i Component för att inte behöva kolla för varje komponent om de ska anropa mouseUp t.ex eller inte,
 		// dvs om de ska reagera på en event eller inte. Label ska inte reagera på någon event alls t.ex
 		//alla ska vara virtual eftersom varje komponent reagerar olika på olika events
@@ -19,17 +19,18 @@ namespace cwing {
 		virtual void keyDown(const SDL_Event&){}
 		virtual void keyUp(const SDL_Event&){}
 		virtual void draw() = 0; // abstract class, ingen generel implementering, subklasser måste definiera implementationen av draw()
+		virtual void tick() = 0; //för att kontrollera objekt när inget händer, updatera de. Ball ska ha den, då den rörs utan input, Paddle ska inte ha.
 		SDL_Rect& getRect() { return rect; }; // för att kunna ha åtkomst till rect
 	protected:
 		//konstruktorn i protected för att vi vill inte att man ska skapa objekt utav komponent klassen, den är bara en basklass till subklasser Button osv..
 		//komponenter ska ha sina koordinater och storlek
-		Component(int x, int y, int w, int h);
+		Sprite(int x, int y, int w, int h);
 	private:
 		//SDL_Rect rect; //för att komponenter ska kunna ha sina koordinater
 		//här förbjuder vi kopiering respektive tilldelning
 		SDL_Rect rect;
-		Component(const Component&) = delete;
-		const Component& operator=(const Component&) = delete;
+		Sprite(const Sprite&) = delete;
+		const Sprite& operator=(const Sprite&) = delete;
 	};
 }
 #endif
