@@ -30,44 +30,44 @@ namespace cwing {
 				case SDL_MOUSEBUTTONDOWN: // kommer inte behövas??
 					//efter att ha tagit emot händelse i loopen går vi igenom alla komponent och anropar deras funktioner för 
 					//att hantera den typen av händelsen och de updaterar sig
-					for (Sprite* c : comps) {
-						c->mouseDown(eve);
+					for (Sprite* s : sprites) {
+						s->mouseDown(eve);
 					}
 					break;
 				case SDL_MOUSEBUTTONUP: // samma?
-					for (Sprite* c : comps) {
-						c->mouseUp(eve);
+					for (Sprite* s : sprites) {
+						s->mouseUp(eve);
 					}
 					break;
 				case SDL_KEYDOWN: 
-					for (Sprite* c : comps) {
-						c->keyDown(eve);
+					for (Sprite* s : sprites) {
+						s->keyDown(eve);
 					}
 					break;
 				case SDL_KEYUP:
-					for (Sprite* c : comps) {
-						c->keyUp(eve);
+					for (Sprite* s : sprites) {
+						s->keyUp(eve);
 					}
 					break;
 				} //switch
 			} //in while
 
-			for (Sprite* c : comps) {
-				c->tick();
+			for (Sprite* s : sprites) {
+				s->tick();
 				//std::cout << removed.size() << std::endl;
 			}
 			
 			for (Sprite* c : added) {
-				comps.push_back(c); //vi överför alla komponenter från added till comps när vi inte längre itererar över den
+				sprites.push_back(c); //vi överför alla komponenter från added till comps när vi inte längre itererar över den
 			}
 			added.clear(); //rensar vektorn
 
 			 // bara en check
 
-			for (Sprite* c : removed) { 
-				for (std::vector<Sprite*>::iterator i = comps.begin(); i != comps.end();) {
-					if (*i == c) { // vi kollar om pekaren c finns i removed vektorn och tar bort den
-						i = comps.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i		
+			for (Sprite* s : removed) { 
+				for (std::vector<Sprite*>::iterator i = sprites.begin(); i != sprites.end();) {
+					if (*i == s) { // vi kollar om pekaren c finns i removed vektorn och tar bort den
+						i = sprites.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i		
 					}
 					else {
 						i++; //i++ är i else då vi vill inte öka iteratorn om ett element tas bort
@@ -80,8 +80,8 @@ namespace cwing {
 			SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
 			//går igenom alla komponenter efter eventet och ritar de i det nya tillståndet. För att rita up llla händelse måste man sudda skärmen först RClear
 			SDL_RenderClear(sys.getRen());
-			for (Sprite* c : comps) {
-				c->draw(); 
+			for (Sprite* s : sprites) {
+				s->draw(); 
 			}
 			//sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
 			SDL_RenderPresent(sys.getRen());
