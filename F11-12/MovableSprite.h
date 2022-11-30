@@ -9,6 +9,8 @@ namespace cwing {
 		//int x, y, w, h;
 		//std::string direction;
 		int speed;
+		//int directionX;
+		//int directionY;
 	protected:
 		MovableSprite(int x, int y, int w, int h, int speed);
 		SDL_Texture* texture;
@@ -17,7 +19,7 @@ namespace cwing {
 		virtual void draw();
 		void tick() {}
 		//vitual dest?
-		~MovableSprite();
+		virtual ~MovableSprite();
 	};
 }
 

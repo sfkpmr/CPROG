@@ -12,6 +12,7 @@ namespace cwing {
 		
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "paddle.png").c_str());
 	}
+
 	// 4 players?
 	void Paddle::keyDown(const SDL_Event& eve) {
 
@@ -76,6 +77,10 @@ namespace cwing {
 			}
 		}
 
+	}
+
+	int Paddle::getPlayerID() const {
+		return playerId;
 	}
 
 	Paddle::~Paddle() {

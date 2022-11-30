@@ -11,6 +11,7 @@ namespace cwing {
 	public:
 		void add(Sprite* c); // skapa och addera komponenter
 		void remove(Sprite* c);
+		std::vector<Sprite*> getSprites() const;
 		void run(); // en händelse loop, vänter på nästa händelse och sen går igenom komponenter och anropar deras motsvarande event-handetings metod
 		~Engine();
 	private:

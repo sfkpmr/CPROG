@@ -14,6 +14,7 @@ namespace cwing {
 		int playerId;
 	public:
 		Paddle(int x, int y, int width, int height, int speed, int player);
+		int getPlayerID() const;
 		void keyDown(const SDL_Event& eve);
 		void keyUp(const SDL_Event& eve);
 		
