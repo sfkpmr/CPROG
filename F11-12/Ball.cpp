@@ -10,7 +10,6 @@
 
 namespace cwing {
 	
-	
 	Ball::Ball(int x, int y, int w, int h, int speed) : MovableSprite(x, y, w, h, speed) { 
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "wdot.png").c_str());
 		velocityX = getSpeed(); // alltid rörs i x
@@ -36,8 +35,9 @@ namespace cwing {
 	//}
 
 	void Ball::paddleCollision() {
-		std::cout << "paddleC " << ge.getSprites().size() << std::endl;
+		//std::cout << "paddleC " << ge.getSprites().size() << std::endl;
 		for (Sprite* s : ge.getSprites()) {
+			//std::cout << "PD LOOP"<< std::endl;
 			if (Paddle* p = dynamic_cast<Paddle*>(s)) {
 				if (p->getPlayerID() == 1) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
@@ -67,8 +67,8 @@ namespace cwing {
 		//velocityX = getSpeed(); // alltid rörs i x
 		//velocityY = 0; // velocity Y ändras först vid collision
 		paddleCollision();
-
-		if (getRect().x + getRect().w >= sys.getWidth() - 100) {
+		//std::cout << "getSprites " << ge.getSprites().size() << std::endl;
+		if (getRect().x + getRect().w >= sys.getWidth()) {
 			//std::cout << "Borde ta bort" << std::endl;
 			ge.remove(this); // kolla om det fungerar
 		} else if (getRect().x <= 0) {
