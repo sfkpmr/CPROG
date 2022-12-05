@@ -2,4 +2,22 @@
   Ball.cpp
 C:\Development\PongStateMachineCopy\F11-12\Ball.cpp(103,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 C:\Development\PongStateMachineCopy\F11-12\Ball.cpp(104,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  GameOverState.cpp
+  GameState.cpp
+  IntroState.cpp
+  MovableSprite.cpp
+  NonMovableSprite.cpp
+  PlayState.cpp
+  Score.cpp
+  Sprite.cpp
+  Main.cpp
+  Paddle.cpp
+C:\Development\PongStateMachineCopy\F11-12\Paddle.cpp(115,29): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+C:\Development\PongStateMachineCopy\F11-12\Paddle.cpp(119,29): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Development\PongStateMachineCopy\F11-12\Paddle.cpp(126,29): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+C:\Development\PongStateMachineCopy\F11-12\Paddle.cpp(131,29): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  Engine.cpp
+  System.cpp
+  Text.cpp
+  Generating Code...
   F11-12.vcxproj -> C:\Development\PongStateMachineCopy\x64\Debug\Pong.exe

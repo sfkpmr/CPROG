@@ -12,14 +12,19 @@ namespace cwing {
 		SDL_Init(SDL_INIT_EVERYTHING);
 		win = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
-		tex = IMG_LoadTexture(ren, (constants::gResPath + "pong_court.png").c_str());
+		tex = IMG_LoadTexture(ren, (constants::gResPath + "pong_court.png").c_str()); //kan skapas vid varje state
 		TTF_Init();
+		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
+		audio = Mix_LoadWAV((constants::gResPath + "score.wav").c_str());
+		Mix_PlayChannel(-1, audio, -1); // 0 - spela en gång, 1 - en gång och en gång till
 		//font = TTF_OpenFont((constants::gResPath + "RetroGaming.ttf").c_str(), 34); //FLYTTA SÖKVÄGEN TILL CONSTANTS
 	}
 
 	System::~System() {
 		//TTF_CloseFont(font);
 		TTF_Quit();
+		Mix_FreeChunk(audio); //ska finnas i Audio klassens destruktor
+		Mix_CloseAudio();
 		SDL_DestroyWindow(win);
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyTexture(tex);

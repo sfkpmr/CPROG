@@ -12,7 +12,7 @@ namespace cwing {
 		//int directionX;
 		//int directionY;
 	protected:
-		MovableSprite(int x, int y, int w, int h, int speed);
+		MovableSprite(int x, int y, int w, int h, int speed); //https://stackoverflow.com/a/16814901
 		SDL_Texture* texture;
 	public:
 		int getSpeed() const;

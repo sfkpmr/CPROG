@@ -2,6 +2,7 @@
 #define SYSTEM_H
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 
 namespace cwing {
 
@@ -22,6 +23,7 @@ namespace cwing {
 		SDL_Renderer* ren;
 		//TTF_Font* font;
 		SDL_Texture* tex;
+		Mix_Chunk* audio;
 		int width = 1000;
 		int height = 600;
 	};
