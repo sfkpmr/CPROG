@@ -14,9 +14,9 @@ namespace cwing {
 	}
 
 	void MovableSprite::draw() {
-		const SDL_Rect& rect = getRect();
+		//const SDL_Rect& rect = getRect();
 		//SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
-		SDL_RenderCopy(sys.getRen(), texture, NULL, &rect);
+		SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
 	}
 	
 	

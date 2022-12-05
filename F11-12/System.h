@@ -12,14 +12,16 @@ namespace cwing {
 		~System();
 
 		SDL_Renderer* getRen() const;
-		TTF_Font* getFont() const;
+		//TTF_Font* getFont() const;
 		int getWidth() const;
 		int getHeight() const;
+		void drawSysBG();
 
 	private:
 		SDL_Window* win;
 		SDL_Renderer* ren;
-		TTF_Font* font;
+		//TTF_Font* font;
+		SDL_Texture* tex;
 		int width = 1000;
 		int height = 600;
 	};

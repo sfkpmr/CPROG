@@ -1,5 +1,7 @@
 #include "System.h"
+#include "Constants.h"
 #include <SDL.h>
+#include <SDL_image.h>
 
 namespace cwing {
 
@@ -10,15 +12,17 @@ namespace cwing {
 		SDL_Init(SDL_INIT_EVERYTHING);
 		win = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
+		tex = IMG_LoadTexture(ren, (constants::gResPath + "pong_court.png").c_str());
 		TTF_Init();
-		font = TTF_OpenFont("c:/Windows/Fonts/arial.ttf", 34); //FLYTTA SÖKVÄGEN TILL CONSTANTS
+		//font = TTF_OpenFont((constants::gResPath + "RetroGaming.ttf").c_str(), 34); //FLYTTA SÖKVÄGEN TILL CONSTANTS
 	}
 
 	System::~System() {
-		TTF_CloseFont(font);
+		//TTF_CloseFont(font);
 		TTF_Quit();
 		SDL_DestroyWindow(win);
 		SDL_DestroyRenderer(ren);
+		SDL_DestroyTexture(tex);
 		SDL_Quit();
 	}
 
@@ -26,9 +30,9 @@ namespace cwing {
 		return ren;
 	}
 
-	TTF_Font* System::getFont() const {
-		return font;
-	}
+	//TTF_Font* System::getFont() const {
+	//	return font;
+	//}
 
 	int System::getWidth() const {
 		return width;
@@ -36,6 +40,10 @@ namespace cwing {
 
 	int System::getHeight() const {
 		return height;
+	}
+
+	void System::drawSysBG() {
+		SDL_RenderCopy(ren, tex, NULL, NULL);
 	}
 
 	//eftersom objektet ligger utanför funktioner blir det ett statisk objekt och dess konstruktor kommer att köras innan programmet startar, och des när klar

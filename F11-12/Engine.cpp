@@ -15,7 +15,7 @@ namespace cwing {
 		removed.push_back(c); //adderar sprites till en temporär vector först när de tas bort
 		//std::cout << removed.size() << std::endl;
 	}
-	//bool keyStateCheck[4] = {};
+
 	void Engine::run() {
 		bool quit = false; 
 		Uint32 tInterval = 1000 / FPS; //hur många milisekunder programmet ska dröja mellan ticks
@@ -79,9 +79,10 @@ namespace cwing {
 			}
 			removed.clear();
 			//Färg till renderaren
-			SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
+			//SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
 			//går igenom alla komponenter efter eventet och ritar de i det nya tillståndet. För att rita up llla händelse måste man sudda skärmen först RClear
 			SDL_RenderClear(sys.getRen());
+			sys.drawSysBG(); //ritar bakgrund
 			for (Sprite* s : sprites) {
 				s->draw(); 
 			}
@@ -103,6 +104,10 @@ namespace cwing {
 
 	bool* Engine::getKeyStateCheck() {
 		return keyStateCheck;
+	}
+
+	bool* Engine::getScoreCollision() {
+		return scoreCollision;
 	}
 
 	Engine::~Engine() {

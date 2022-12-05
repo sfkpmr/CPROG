@@ -6,12 +6,13 @@
 #include "System.h"
 #include "Engine.h"
 #include "Sprite.h"
+#include "Score.h"
 #include <iostream>
 
 namespace cwing {
 	
 	Ball::Ball(int x, int y, int w, int h, int speed) : MovableSprite(x, y, w, h, speed) { 
-		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "wdot.png").c_str());
+		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "pong_ball.png").c_str());
 		velocityX = getSpeed(); // alltid rörs i x
 		velocityY = 0; // velocity Y ändras först vid collision
 		
@@ -44,7 +45,7 @@ namespace cwing {
 						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
 						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
 						double normalizeRY = relativeY / (p->getRect().h / 2);
-						double angle = normalizeRY * (5 * 3.14 / 12); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
+						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = -getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
 					}
@@ -53,7 +54,7 @@ namespace cwing {
 						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
 						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
 						double normalizeRY = relativeY / (p->getRect().h / 2);
-						double angle = normalizeRY * (5 * 3.14 / 12); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
+						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
 					}
@@ -69,11 +70,14 @@ namespace cwing {
 		paddleCollision();
 		//std::cout << "getSprites " << ge.getSprites().size() << std::endl;
 		if (getRect().x + getRect().w >= sys.getWidth()) {
-			//std::cout << "Borde ta bort" << std::endl;
+			ge.getScoreCollision()[1] = true;
 			ge.remove(this); // kolla om det fungerar
+			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
 		} else if (getRect().x <= 0) {
 			//std::cout << "Temp" << std::endl;
+			ge.getScoreCollision()[0] = true;
 			ge.remove(this);
+			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
 		} 
 		
 		if (getRect().y <= 0) {

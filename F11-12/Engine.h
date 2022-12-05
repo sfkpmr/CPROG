@@ -13,6 +13,7 @@ namespace cwing {
 		void remove(Sprite* c);
 		std::vector<Sprite*> getSprites() const;
 		bool* getKeyStateCheck();
+		bool* getScoreCollision();
 		void run(); // en händelse loop, vänter på nästa händelse och sen går igenom komponenter och anropar deras motsvarande event-handetings metod
 		~Engine();
 	private:
@@ -20,6 +21,7 @@ namespace cwing {
 		std::vector<Sprite*> added; //innehåller objekt som adderas före iterering
 		std::vector<Sprite*> removed; //innehåller sprites som tas bort under iterering
 		bool keyStateCheck[4] = {};
+		bool scoreCollision[2] = {};
 	};
 	extern Engine ge;
 }

@@ -16,7 +16,7 @@ namespace cwing {
 		SDL_Texture* texture;
 	public:
 		int getSpeed() const;
-		virtual void draw();
+		void draw(); //virtual eller ej???
 		void tick() {}
 		//vitual dest?
 		virtual ~MovableSprite();
