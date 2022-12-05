@@ -1,4 +1,4 @@
-#include <SDL.h>
+ #include <SDL.h>
 #include <string>
 #include "Engine.h"
 #include "Sprite.h"
@@ -18,12 +18,11 @@ int main(int argc, char** argv) {
 	Sprite* ball = Ball::getInstance(475, 275, 25, 25, 12);
 	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 10, 2);
 	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 10, 1);
-	Sprite* score_l = Score::getInstance(280, 30, 40, 2);
-	Sprite* score_r = Score::getInstance(700, 30, 40, 1);
-	//Sprite* text = Text::getIntance(100, 100, "Anja Peder", 100);
+	//Sprite* score_l = Score::getInstance(280, 30, 40, 2);
+	//Sprite* score_r = Score::getInstance(700, 30, 40, 1);
 	//ge.add(text);
-	ge.add(score_l);
-	ge.add(score_r);
+	//ge.add(score_l);
+	//ge.add(score_r);
 	ge.add(paddle_l);
 	ge.add(paddle_r);
 	ge.add(ball);

@@ -6,7 +6,7 @@
 #include "System.h"
 #include "Engine.h"
 #include "Sprite.h"
-#include "Score.h"
+#include "Paddle.h"
 #include <iostream>
 
 namespace cwing {
@@ -45,18 +45,32 @@ namespace cwing {
 						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
 						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
 						double normalizeRY = relativeY / (p->getRect().h / 2);
+						if (normalizeRY > 1) {
+							normalizeRY = 1;
+						} 
+						if (normalizeRY < -1) {
+							normalizeRY = -1;
+						} 
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = -getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
+						std::cout << "X " << velocityX << "  Y " << velocityY << "  " << normalizeRY << std::endl;
 					}
 				} else if (p->getPlayerID() == 2) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
 						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
 						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
 						double normalizeRY = relativeY / (p->getRect().h / 2);
+						if (normalizeRY > 1) {
+							normalizeRY = 1;
+						}
+						if (normalizeRY < -1) {
+							normalizeRY = -1;
+						}
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
+						std::cout << "X " << velocityX << "  Y " << velocityY << "  " << normalizeRY << std::endl;
 					}
 				}
 			}

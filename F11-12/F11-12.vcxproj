@@ -144,8 +144,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="GameOverState.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="MovableSprite.cpp" />
     <ClCompile Include="NonMovableSprite.cpp" />
+    <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -156,8 +160,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="GameOverState.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="MovableSprite.h" />
     <ClInclude Include="NonMovableSprite.h" />
+    <ClInclude Include="PlayState.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Constants.h" />

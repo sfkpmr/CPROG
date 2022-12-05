@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include <SDL.h>
 #include "System.h"
+#include "PlayState.h"
 #include <iostream>
 namespace cwing {
 
@@ -17,46 +18,29 @@ namespace cwing {
 	}
 
 	void Engine::run() {
+		//GameState* currentState = IntroState::getInstance();
+		//GameState* gState = new GameState();
+		//GameState* currentState = gState->getCurrentState();
+		//currentState = IntroState::getInstance();
+		currentState = IntroState::getInstance();
+		currentState->enterState();
+		//currentState->setCurrentState(currentState);
+		//currentState->getCurrentState()->enterState();
 		bool quit = false; 
 		Uint32 tInterval = 1000 / FPS; //hur många milisekunder programmet ska dröja mellan ticks
 		while (!quit) {
 			Uint32 nextTick = SDL_GetTicks() + tInterval; //nextTick räknar ur när nästa tick ska vara. SDL_GetTicks() returnerar antal milisekunder sen initieringen utav SDL
 			SDL_Event eve;
-			while (SDL_PollEvent(&eve)) {
-				switch (eve.type) {
-				case SDL_QUIT:
+			while (SDL_PollEvent(&eve) != 0) {
+				if (eve.type == SDL_QUIT) {
 					quit = true;
-					break;
-				case SDL_MOUSEBUTTONDOWN: // kommer inte behövas??
-					//efter att ha tagit emot händelse i loopen går vi igenom alla komponent och anropar deras funktioner för 
-					//att hantera den typen av händelsen och de updaterar sig
-					for (Sprite* s : sprites) {
-						s->mouseDown(eve);
-					}
-					break;
-				case SDL_MOUSEBUTTONUP: // samma?
-					for (Sprite* s : sprites) {
-						s->mouseUp(eve);
-					}
-					break;
-				case SDL_KEYDOWN: 
-					for (Sprite* s : sprites) {
-						s->keyDown(eve);
-					}
-					break;
-				case SDL_KEYUP:
-					for (Sprite* s : sprites) {
-						s->keyUp(eve);
-					}
-					break;
-				} //switch
+				}
+				currentState->stateEvents(eve);
 			} //in while
 			//std::cout << removed.size() << std::endl;
-			
-			for (Sprite* s : sprites) {
-				//std::cout << "In tick: " << SDL_GetTicks() << " " << sprites.size() << std::endl;
-				s->tick();
-			}
+			currentState->updateState();
+			  
+			currentState->changeState();
 			//std::cout << " Out tick: " << SDL_GetTicks() << " " << sprites.size() << std::endl;
 			for (Sprite* s : added) {
 				//std::cout << "tick: " << SDL_GetTicks() << " " << added.size() << std::endl;
@@ -83,9 +67,7 @@ namespace cwing {
 			//går igenom alla komponenter efter eventet och ritar de i det nya tillståndet. För att rita up llla händelse måste man sudda skärmen först RClear
 			SDL_RenderClear(sys.getRen());
 			sys.drawSysBG(); //ritar bakgrund
-			for (Sprite* s : sprites) {
-				s->draw(); 
-			}
+			currentState->renderState();
 			//sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
 			SDL_RenderPresent(sys.getRen());
 			//i slutet av loopen, efter allt ritas ut, räknar vi tid kvar till nästa tick
@@ -108,6 +90,14 @@ namespace cwing {
 
 	bool* Engine::getScoreCollision() {
 		return scoreCollision;
+	}
+
+	void Engine::setCurrentState(GameState* state) {
+		currentState = state;
+	}
+
+	GameState* Engine::getCurrentState() {
+		return currentState;
 	}
 
 	Engine::~Engine() {

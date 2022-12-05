@@ -3,7 +3,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "MovableSprite.h"
-#include "Paddle.h"
 #include "Sprite.h"
 #include <string>
 
@@ -17,7 +16,7 @@ private:
 	//SDL_Texture* texture;
 	Ball(int x, int y, int w, int h, int speed);
 	double velocityX, velocityY;
-	std::string direction = "UP";
+	//std::string direction = "UP";
 public:
 	static Ball* getInstance(int x, int y, int w, int h, int speed);
 	//void draw();

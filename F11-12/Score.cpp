@@ -24,6 +24,10 @@ namespace cwing {
 		}
 	}
 
+	int Score::getScore() {
+		return score;
+	}
+
 	bool Score::checkIfScored() {
 		return scored;
 	}

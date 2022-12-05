@@ -13,7 +13,8 @@ namespace cwing {
 	public:
 		static Score* getInstance(int x, int y, int fontSize, int playerID);
 		void tick();
-		bool checkIfScored();
+		bool checkIfScored(); //Om inget sätt att fixa Score update genom det, ta bort. Just nu hanteras via tick() och en array i Engine
+		int getScore();
 	};
 }
 #endif
