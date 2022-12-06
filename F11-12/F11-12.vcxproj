@@ -148,7 +148,7 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="MovableSprite.cpp" />
-    <ClCompile Include="NonMovableSprite.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -164,7 +164,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="IntroState.h" />
     <ClInclude Include="MovableSprite.h" />
-    <ClInclude Include="NonMovableSprite.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Sprite.h" />

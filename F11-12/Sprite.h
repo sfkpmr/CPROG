@@ -21,6 +21,7 @@ namespace cwing {
 		virtual void draw() = 0; // abstract class, ingen generel implementering, subklasser måste definiera implementationen av draw()
 		virtual void tick() = 0; //för att kontrollera objekt när inget händer, updatera de. Ball ska ha den, då den rörs utan input, Paddle ska inte ha.
 		SDL_Rect& getRect() { return rect; }; // för att kunna ha åtkomst till rect
+		//SDL_Texture* getTexture() { return texture; };
 	protected:
 		//konstruktorn i protected för att vi vill inte att man ska skapa objekt utav komponent klassen, den är bara en basklass till subklasser
 		//komponenter ska ha sina koordinater och storlek
@@ -29,6 +30,7 @@ namespace cwing {
 		//SDL_Rect rect; //för att komponenter ska kunna ha sina koordinater
 		//här förbjuder vi kopiering respektive tilldelning
 		SDL_Rect rect;
+		//SDL_Texture* texture;
 		Sprite(const Sprite&) = delete;
 		const Sprite& operator=(const Sprite&) = delete;
 	};

@@ -25,7 +25,7 @@ namespace cwing {
 		std::vector<Sprite*> added; //innehåller objekt som adderas före iterering
 		std::vector<Sprite*> removed; //innehåller sprites som tas bort under iterering
 		GameState* currentState = NULL;
-		bool keyStateCheck[4] = {};
+		bool keyStateCheck[4] = {}; //FRÅGA OM RÄTT
 		bool scoreCollision[2] = {};
 	};
 	extern Engine ge;

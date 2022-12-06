@@ -15,10 +15,11 @@ namespace cwing {
 	}
 
 	void Text::draw() {
-		getRect().h = surf->h;
-		getRect().w = surf->w;
+		getRect().h = surf->h; 
+		getRect().w = surf->w; 
 		SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
 	}
+
 	//ändrar text, renderar om texturen
 	void Text::setText(std::string nText) {
 		SDL_FreeSurface(surf);

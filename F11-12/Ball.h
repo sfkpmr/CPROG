@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include "MovableSprite.h"
 #include "Sprite.h"
+#include "Obstacle.h"
 #include <string>
 
 
@@ -22,6 +23,9 @@ public:
 	//void draw();
 	//bool checkBounds();
 	void paddleCollision();
+	void obstacleCollision();
+	SDL_Point* getCenter();
+	int getClosestObsticle(Obstacle* o);
 	void tick();
 	~Ball();
 };

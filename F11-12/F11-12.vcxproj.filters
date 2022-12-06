@@ -36,7 +36,7 @@
     <ClCompile Include="MovableSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NonMovableSprite.cpp">
+    <ClCompile Include="Obstacle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Text.cpp">
@@ -80,7 +80,7 @@
     <ClInclude Include="MovableSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NonMovableSprite.h">
+    <ClInclude Include="Obstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">

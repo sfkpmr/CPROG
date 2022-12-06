@@ -24,7 +24,7 @@ namespace cwing {
 	}
 
 	void PlayState::updateState() {
-		std::cout << "Play" << std::endl;
+		//std::cout << "Play" << std::endl;
 		for (Sprite* s : ge.getSprites()) {
 			s->tick();
 		}

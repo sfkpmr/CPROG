@@ -31,7 +31,7 @@ namespace cwing {
 	}
 
 	void IntroState::updateState() {
-		std::cout << "Intro" << std::endl;
+		//std::cout << "Intro" << std::endl;
 	}
 
 	void IntroState::exitState() {

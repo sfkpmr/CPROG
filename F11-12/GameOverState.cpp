@@ -23,7 +23,7 @@ namespace cwing {
 	}
 
 	void GameOverState::updateState() {
-		std::cout << "GameOver" << std::endl;
+		//std::cout << "GameOver" << std::endl;
 	}
 
 	void GameOverState::exitState() {

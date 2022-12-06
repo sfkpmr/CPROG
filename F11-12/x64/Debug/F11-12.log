@@ -1,5 +1,5 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (F11-12.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Engine.cpp
-  PlayState.cpp
-  Generating Code...
+  Ball.cpp
+C:\Development\PongStateMachineCopy\F11-12\Ball.cpp(221,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Development\PongStateMachineCopy\F11-12\Ball.cpp(222,27): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   F11-12.vcxproj -> C:\Development\PongStateMachineCopy\x64\Debug\Pong.exe
