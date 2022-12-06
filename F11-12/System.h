@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+#include <string>
 
 namespace cwing {
 
@@ -17,6 +18,7 @@ namespace cwing {
 		int getWidth() const;
 		int getHeight() const;
 		void drawSysBG();
+		void playSfx(std::string sfx);
 
 	private:
 		SDL_Window* win;

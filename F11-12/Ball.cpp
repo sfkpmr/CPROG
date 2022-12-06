@@ -54,7 +54,7 @@ namespace cwing {
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = -getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
-						std::cout << "X " << velocityX << "  Y " << velocityY << "  " << normalizeRY << std::endl;
+						sys.playSfx("p_hit4416.wav");
 					}
 				} else if (p->getPlayerID() == 2) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
@@ -70,7 +70,7 @@ namespace cwing {
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
-						std::cout << "X " << velocityX << "  Y " << velocityY << "  " << normalizeRY << std::endl;
+						sys.playSfx("p_hit4416.wav");
 					}
 				}
 			}
@@ -85,19 +85,22 @@ namespace cwing {
 		//std::cout << "getSprites " << ge.getSprites().size() << std::endl;
 		if (getRect().x + getRect().w >= sys.getWidth()) {
 			ge.getScoreCollision()[1] = true;
+			sys.playSfx("score4416.wav");
 			ge.remove(this); // kolla om det fungerar
 			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
 		} else if (getRect().x <= 0) {
-			//std::cout << "Temp" << std::endl;
 			ge.getScoreCollision()[0] = true;
+			sys.playSfx("score4416.wav");
 			ge.remove(this);
 			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
 		} 
 		
 		if (getRect().y <= 0) {
 			velocityY = -velocityY;
+			sys.playSfx("w_hit4416.wav");
 		} else if ((getRect().y + getRect().h) >= sys.getHeight()) {
 			velocityY = -velocityY;
+			sys.playSfx("w_hit4416.wav");
 		}
 
 		getRect().x += velocityX;

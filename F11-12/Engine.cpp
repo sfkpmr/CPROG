@@ -31,7 +31,7 @@ namespace cwing {
 		while (!quit) {
 			Uint32 nextTick = SDL_GetTicks() + tInterval; //nextTick räknar ur när nästa tick ska vara. SDL_GetTicks() returnerar antal milisekunder sen initieringen utav SDL
 			SDL_Event eve;
-			while (SDL_PollEvent(&eve) != 0) {
+			while (SDL_PollEvent(&eve) != 0) { // != 0 needed?
 				if (eve.type == SDL_QUIT) {
 					quit = true;
 				}

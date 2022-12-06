@@ -15,8 +15,6 @@ namespace cwing {
 		tex = IMG_LoadTexture(ren, (constants::gResPath + "pong_court.png").c_str()); //kan skapas vid varje state
 		TTF_Init();
 		Mix_OpenAudio(22050, AUDIO_S16SYS, 2, 4096);
-		audio = Mix_LoadWAV((constants::gResPath + "score.wav").c_str());
-		Mix_PlayChannel(-1, audio, -1); // 0 - spela en gång, 1 - en gång och en gång till
 		//font = TTF_OpenFont((constants::gResPath + "RetroGaming.ttf").c_str(), 34); //FLYTTA SÖKVÄGEN TILL CONSTANTS
 	}
 
@@ -47,9 +45,16 @@ namespace cwing {
 		return height;
 	}
 
+	void System::playSfx(std::string sfx) {
+		audio = Mix_LoadWAV((constants::gResPath + sfx).c_str());
+		Mix_PlayChannel(-1, audio, 0); // 0 - spela en gång, 1 - en gång och en gång till
+	}
+
 	void System::drawSysBG() {
 		SDL_RenderCopy(ren, tex, NULL, NULL);
 	}
+	//audio = Mix_LoadWAV((constants::gResPath + sfx).c_str());
+	//Mix_PlayChannel(-1, audio, -1); // 0 - spela en gång, 1 - en gång och en gång till
 
 	//eftersom objektet ligger utanför funktioner blir det ett statisk objekt och dess konstruktor kommer att köras innan programmet startar, och des när klar
 	//global data, extern System sys;

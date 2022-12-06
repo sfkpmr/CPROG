@@ -16,8 +16,8 @@ int main(int argc, char** argv) {
 
 	//Sprite* ball = Ball::getInstance(500 - 25, 300 - 25, 50, 50, 10);
 	Sprite* ball = Ball::getInstance(475, 275, 25, 25, 12);
-	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 10, 2);
-	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 10, 1);
+	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 8, 2);
+	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 8, 1);
 	//Sprite* score_l = Score::getInstance(280, 30, 40, 2);
 	//Sprite* score_r = Score::getInstance(700, 30, 40, 1);
 	//ge.add(text);

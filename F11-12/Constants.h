@@ -6,7 +6,7 @@
 namespace constants
 {
 	//gResPath-contains the relative path to your resources.
-	const std::string gResPath = "C:/Development/PongResources/";
+	const std::string gResPath = "C:/Development/PongStateMachineCopy/Resources/";
 }
 
 #endif

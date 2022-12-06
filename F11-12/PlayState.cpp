@@ -17,15 +17,18 @@ namespace cwing {
 	}
 
 	void PlayState::enterState() {
-		//std::cout << "enter Play" << std::endl;
-		Score* score_l = Score::getInstance(280, 30, 40, 2);
-		Score* score_r = Score::getInstance(700, 30, 40, 1);
+		Sprite* score_l = Score::getInstance(280, 30, 40, 2);
+		Sprite* score_r = Score::getInstance(700, 30, 40, 1);
 		ge.add(score_l);
 		ge.add(score_r);
 	}
 
 	void PlayState::updateState() {
-		std::cout << "enter Play" << std::endl;
+		std::cout << "Play" << std::endl;
+		for (Sprite* s : ge.getSprites()) {
+			s->tick();
+		}
+
 		for (Sprite* s : ge.getSprites()) {
 			if (Score* sc = dynamic_cast<Score*>(s)) {
 				if (sc->getScore() == 5) {
@@ -33,13 +36,12 @@ namespace cwing {
 				}
 			}
 		}
-
-		for (Sprite* s : ge.getSprites()) {
-			s->tick();
-		}
 	}
 
 	void PlayState::exitState() {
+		for (int i = 0; i < 4; i++) { // fixar paddle går efter game over state, om key gick blev aldrig upp
+			ge.getKeyStateCheck()[i] = false;
+		}
 		//for (Sprite* s : ge.getSprites()) {
 		//	if (Ball* b = dynamic_cast<Ball*>(s)) {
 		//		ge.remove(s);

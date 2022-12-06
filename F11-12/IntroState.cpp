@@ -6,6 +6,8 @@
 #include "Text.h"
 #include "Score.h"
 #include "PlayState.h"
+#include <iostream>
+
 
 namespace cwing {
 
@@ -29,7 +31,7 @@ namespace cwing {
 	}
 
 	void IntroState::updateState() {
-
+		std::cout << "Intro" << std::endl;
 	}
 
 	void IntroState::exitState() {
