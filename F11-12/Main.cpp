@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
 	//Engine ge;
 
 	//Sprite* ball = Ball::getInstance(500 - 25, 300 - 25, 50, 50, 10);
-	Sprite* ball = Ball::getInstance(475, 100, 25, 25, 12);
+	Sprite* ball = Ball::getInstance(475, 275, 25, 25, 8);
 	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 8, 2);
 	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 8, 1);
 	Sprite* hinder = Obstacle::getInstance(100,100,100,100);

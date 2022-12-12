@@ -18,6 +18,7 @@ private:
 	Ball(int x, int y, int w, int h, int speed);
 	double velocityX, velocityY;
 	//std::string direction = "UP";
+	int ticksSinceLH;
 public:
 	static Ball* getInstance(int x, int y, int w, int h, int speed);
 	//void draw();
@@ -25,8 +26,10 @@ public:
 	void paddleCollision();
 	void obstacleCollision();
 	SDL_Point* getCenter();
-	int getClosestObsticle(Obstacle* o);
+	int getClosestObsticle(Obstacle* o); //change name?
 	void tick();
+	double getVelocityX() { return velocityX; }
+	void setVelocityX(double v) { velocityX = v; }
 	~Ball();
 };
 
