@@ -14,8 +14,8 @@ namespace cwing {
 	
 	Ball::Ball(int x, int y, int w, int h, int speed) : MovableSprite(x, y, w, h, speed) { 
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "pong_ball.png").c_str());
-		velocityX = getSpeed(); // alltid rörs i x
-		velocityY = 0; // velocity Y ändras först vid collision
+		velocityX = getSpeed(); // alltid rï¿½rs i x
+		velocityY = 0; // velocity Y ï¿½ndras fï¿½rst vid collision
 		ticksSinceLH = 0;
 	}
 
@@ -36,15 +36,15 @@ namespace cwing {
 	//	return true;
 	//}
 
-	void Ball::paddleCollision() {  // FIXA BOLLEN TRÄFFAR 2 GÅNGER
+	void Ball::paddleCollision() {  // FIXA BOLLEN TRï¿½FFAR 2 Gï¿½NGER
 		//std::cout << "paddleC " << ge.getSprites().size() << std::endl;
 		for (Sprite* s : ge.getSprites()) {
 			//std::cout << "PD LOOP"<< std::endl;
 			if (Paddle* p = dynamic_cast<Paddle*>(s)) {
 				if (p->getPlayerID() == 1) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
-						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
-						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
+						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var pï¿½ paddle trï¿½ffar bollen
+						//dï¿½ paddle kan vara olika i hï¿½jd, behï¿½ver vi normalisera relativeY sï¿½ vi fï¿½r nummer mellar -1 och 1, och inte -5 och 5 om paddle ï¿½r 10 pixel hï¿½g
 						double normalizeRY = relativeY / (p->getRect().h / 2);
 						if (normalizeRY > 1) {
 							normalizeRY = 1;
@@ -55,12 +55,11 @@ namespace cwing {
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = -getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
-						sys.playSfx("p_hit4416.wav");
 					}
 				} else if (p->getPlayerID() == 2) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
-						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
-						//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
+						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var pï¿½ paddle trï¿½ffar bollen
+						//dï¿½ paddle kan vara olika i hï¿½jd, behï¿½ver vi normalisera relativeY sï¿½ vi fï¿½r nummer mellar -1 och 1, och inte -5 och 5 om paddle ï¿½r 10 pixel hï¿½g
 						double normalizeRY = relativeY / (p->getRect().h / 2);
 						if (normalizeRY > 1) {
 							normalizeRY = 1;
@@ -71,7 +70,6 @@ namespace cwing {
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
-						sys.playSfx("p_hit4416.wav");
 					}
 				}
 			}
@@ -84,8 +82,8 @@ namespace cwing {
 				//if (SDL_HasIntersection(&getRect() , &(o->getRect()))) {
 				//	std::cout << getRect().x << "  " << getRect().y << std::endl;
 				//	getClosestObsticle(o);
-				//	double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
-				//	//då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
+				//	double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var pï¿½ paddle trï¿½ffar bollen
+				//	//dï¿½ paddle kan vara olika i hï¿½jd, behï¿½ver vi normalisera relativeY sï¿½ vi fï¿½r nummer mellar -1 och 1, och inte -5 och 5 om paddle ï¿½r 10 pixel hï¿½g
 				//	double normalizeRY = relativeY / (o->getRect().h / 2);
 				//	if (normalizeRY > 1) {
 				//		normalizeRY = 1;
@@ -96,7 +94,6 @@ namespace cwing {
 				//	double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 				//	velocityX = -getSpeed() * cos(angle);
 				//	velocityY = getSpeed() * -sin(angle);
-				//	sys.playSfx("p_hit4416.wav");
 				if (SDL_HasIntersection(&getRect(), &(o->getRect()))) {
 					//std::cout << getRect().x << "  " << getRect().y << std::endl;
 					int temp = getClosestObsticle(o);
@@ -114,7 +111,6 @@ namespace cwing {
 						//velocityX = -getSpeed() * cos(angle);
 						//velocityY = -getSpeed() * -sin(angle);
 						velocityY = -velocityY;
-						sys.playSfx("p_hit4416.wav");
 					} else if (temp == 2) { //BUTTOM
 						std::cout << "Bottom" << std::endl;
 						//double relativeBottom = (o->getRect().x + (o->getRect().w / 2)) - (getRect().x + (getRect().w / 2));
@@ -130,11 +126,10 @@ namespace cwing {
 						//velocityY = -getSpeed() * -sin(angle);
 
 						velocityY = -velocityY;
-						sys.playSfx("p_hit4416.wav");
 					} else if (temp == 3) { //LEFT
 						std::cout << "Left" << std::endl;
-						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
-						////då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
+						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var pï¿½ paddle trï¿½ffar bollen
+						////dï¿½ paddle kan vara olika i hï¿½jd, behï¿½ver vi normalisera relativeY sï¿½ vi fï¿½r nummer mellar -1 och 1, och inte -5 och 5 om paddle ï¿½r 10 pixel hï¿½g
 						//double normalizeRY = relativeY / (o->getRect().h / 2);
 						//if (normalizeRY > 1) {
 						//	normalizeRY = 1;
@@ -147,11 +142,10 @@ namespace cwing {
 						//velocityY = getSpeed() * -sin(angle);
 						std::cout << "vel left: " << velocityX << " " << -velocityX << std::endl;
 						velocityX = -velocityX;
-						sys.playSfx("p_hit4416.wav");
 					} else if (temp == 4) { //RIGHT
 						std::cout << "Right" << std::endl;
-						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var på paddle träffar bollen
-						////då paddle kan vara olika i höjd, behöver vi normalisera relativeY så vi får nummer mellar -1 och 1, och inte -5 och 5 om paddle är 10 pixel hög
+						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var pï¿½ paddle trï¿½ffar bollen
+						////dï¿½ paddle kan vara olika i hï¿½jd, behï¿½ver vi normalisera relativeY sï¿½ vi fï¿½r nummer mellar -1 och 1, och inte -5 och 5 om paddle ï¿½r 10 pixel hï¿½g
 						//double normalizeRY = relativeY / (o->getRect().h / 2);
 						//if (normalizeRY > 1) {
 						//	normalizeRY = 1;
@@ -164,7 +158,6 @@ namespace cwing {
 						//velocityY = getSpeed() * -sin(angle);
 						std::cout << "vel right: " << velocityX << " " << -velocityX << std::endl;
 						velocityX = -velocityX;
-						sys.playSfx("p_hit4416.wav");
 					} else if (temp == 5) {
 						velocityX = -velocityX;
 						velocityY = -velocityY;
@@ -221,31 +214,27 @@ namespace cwing {
 	
 	void Ball::tick() {
 		// e i konstruktor nu
-		//velocityX = getSpeed(); // alltid rörs i x
-		//velocityY = 0; // velocity Y ändras först vid collision
+		//velocityX = getSpeed(); // alltid rï¿½rs i x
+		//velocityY = 0; // velocity Y ï¿½ndras fï¿½rst vid collision
 		paddleCollision();
 		obstacleCollision();
 		//std::cout << "getSprites " << ge.getSprites().size() << std::endl;
 		if (getRect().x + getRect().w >= sys.getWidth()) {
 			ge.getScoreCollision()[1] = true;
-			sys.playSfx("score4416.wav");
 			ge.remove(this); // kolla om det fungerar
 			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
 		} else if (getRect().x <= 0) {
 			ge.getScoreCollision()[0] = true;
-			sys.playSfx("score4416.wav");
 			ge.remove(this);
 			//Ball* ball = Ball::getInstance(475, 275, 25, 25, 12);			
 			ge.add(Ball::getInstance(475, 275, 25, 25, getSpeed()));
-			//ball->setVelocityX(-getSpeed()); //ökar speed??			
+			//ball->setVelocityX(-getSpeed()); //ï¿½kar speed??			
 		} 
 		
 		if (getRect().y <= 0) {
 			velocityY = -velocityY;
-			sys.playSfx("w_hit4416.wav");
 		} else if ((getRect().y + getRect().h) >= sys.getHeight()) {
 			velocityY = -velocityY;
-			sys.playSfx("w_hit4416.wav");
 		}
 
 		getRect().x += velocityX;

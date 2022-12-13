@@ -6,7 +6,7 @@
 namespace constants
 {
 	//gResPath-contains the relative path to your resources.
-	const std::string gResPath = "C:/Development/PongStateMachineCopy/Resources/";
+	const std::string gResPath = "/home/marcus/Documents/GitHub/CPROG/Resources/";
 }
 
 #endif
