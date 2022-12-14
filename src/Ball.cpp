@@ -7,6 +7,7 @@
 #include "Engine.h"
 #include "Sprite.h"
 #include "Paddle.h"
+#include "Powerup.h"
 #include <cmath>
 #include <iostream>
 
@@ -81,7 +82,7 @@ namespace cwing {
 
 	void Ball::obstacleCollision() {
 		for (Sprite* s : ge.getSprites()) {
-			if (Obstacle* o = dynamic_cast<Obstacle*>(s)) {
+			if (Obstacle* o = dynamic_cast<Obstacle*>(s)) { // ändra till getSpriteType?
 				//if (SDL_HasIntersection(&getRect() , &(o->getRect()))) {
 				//	std::cout << getRect().x << "  " << getRect().y << std::endl;
 				//	getClosestObsticle(o);
@@ -171,7 +172,14 @@ namespace cwing {
 						velocityY = -velocityY;
 					}					
 				}
-			} 
+			} else if (Powerup* p = dynamic_cast<Powerup*>(s)){
+				if(SDL_HasIntersection(&getRect(), &(p->getRect())) && p->getHidden() == false){
+					setSpeed();
+					//velocityX = getSpeed();
+					//velocityY = getSpeed();
+					p->hide();
+				}
+			}
 		}
 	}
 

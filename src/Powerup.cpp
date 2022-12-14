@@ -1,11 +1,13 @@
 #include "Powerup.h"
 #include "Constants.h"
 #include "System.h"
+#include <iostream>
 #include <SDL2/SDL_image.h>
 
 namespace cwing{
     Powerup::Powerup(int x, int y, int w, int h): Sprite(x, y, w, h){
         texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "star.png").c_str());
+        hidden = false;
         setSpriteType("powerup");
     }
 
@@ -18,7 +20,16 @@ namespace cwing{
     }
 
     void Powerup::tick(){
+        
+    }
 
+    bool Powerup::getHidden(){
+        return hidden;
+    }
+
+    void Powerup::hide(){
+        hidden = !hidden;
+        std::cout << hidden << std::endl;
     }
 
     Powerup::~Powerup(){

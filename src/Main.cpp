@@ -7,6 +7,7 @@
 #include "Text.h"
 #include "Score.h"
 #include "Obstacle.h"
+#include "Powerup.h"
 #include <iostream>
 
 using namespace std;
@@ -20,6 +21,7 @@ int main(int argc, char** argv) {
 	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 8, 2);
 	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 8, 1);
 	Sprite* hinder = Obstacle::getInstance(100,100,100,100);
+	Sprite* powerUp = Powerup::getInstance(300,300,100,100);
 /* 	Sprite* hinder1 = Obstacle::getInstance(200,200,50,50);
 	Sprite* hinder2 = Obstacle::getInstance(400,400,50,50);
 	Sprite* hinder3 = Obstacle::getInstance(500,300,50,50); */
@@ -32,6 +34,7 @@ int main(int argc, char** argv) {
 	ge.add(paddle_r);
 	ge.add(ball);
 	ge.add(hinder);
+	ge.add(powerUp);
 /* 	ge.add(hinder1);
 	ge.add(hinder2);
 	ge.add(hinder3); */

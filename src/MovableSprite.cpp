@@ -13,6 +13,10 @@ namespace cwing {
 		return speed;
 	}
 
+	void MovableSprite::setSpeed(){
+		speed *= 1.5;
+	}
+
 	void MovableSprite::draw() {
 		//const SDL_Rect& rect = getRect();
 		//SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
