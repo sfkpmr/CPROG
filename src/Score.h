@@ -6,7 +6,7 @@ namespace cwing {
 	class Score: public Text
 	{
 	private:
-		int score {0};
+		int score {0}; //initiera i cpp constructor?
 		int playerID {0};
 		//bool scored;
 		Score(int x, int y, int fontSize, int playerID);

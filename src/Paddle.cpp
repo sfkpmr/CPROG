@@ -14,6 +14,10 @@ namespace cwing {
 		setSpriteType("paddle");
 	}
 
+	Paddle* Paddle::getInstance(int x, int y, int width, int height, int speed, int player){
+		return new Paddle(x, y, width, height, speed, player);
+	}
+
 	// 4 players?
 	void Paddle::keyDown(const SDL_Event& eve) {
 		if (playerId == 1) {

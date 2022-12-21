@@ -56,6 +56,7 @@ namespace cwing {
 				for (std::vector<Sprite*>::iterator i = sprites.begin(); i != sprites.end();) {
 					if (*i == s) { // vi kollar om pekaren c finns i removed vektorn och tar bort den
 						i = sprites.erase(i); //i= f�r att erase() returnerar iterator p� det f�rsta elementet som �r kvar i vektorn, efter i
+						std::cout << "removed" << std::endl;
 					} else {
 						i++; //i++ �r i else d� vi vill inte �ka iteratorn om ett element tas bort
 					}
@@ -84,7 +85,7 @@ namespace cwing {
 		return sprites;
 	}
 
-	bool* Engine::getKeyStateCheck() {
+	bool* Engine::getKeyStateCheck() { //referens return inte pointer?
 		return keyStateCheck;
 	}
 

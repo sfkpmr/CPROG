@@ -13,20 +13,20 @@ namespace cwing {
 		return new Obstacle(x, y, w, h);
 	}
 
-	SDL_Point* Obstacle::getTopCenter() {
-		return new SDL_Point{ getRect().x + (getRect().w / 2), getRect().y };
+	SDL_Point Obstacle::getTopCenter() {
+		return SDL_Point{ getRect().x + (getRect().w / 2), getRect().y };
 	}
 
-	SDL_Point* Obstacle::getBottomCenter() {
-		return new SDL_Point{ getRect().x + (getRect().w / 2), getRect().h + getRect().y };
+	SDL_Point Obstacle::getBottomCenter() {
+		return SDL_Point{ getRect().x + (getRect().w / 2), getRect().h + getRect().y };
 	}
 
-	SDL_Point* Obstacle::getLeftCenter() {
-		return new SDL_Point{ getRect().x, getRect().y + (getRect().h / 2) };
+	SDL_Point Obstacle::getLeftCenter() {
+		return SDL_Point{ getRect().x, getRect().y + (getRect().h / 2) };
 	}
 
-	SDL_Point* Obstacle::getRightCenter() {
-		return new SDL_Point{ getRect().x + getRect().w, getRect().y + (getRect().h / 2) };
+	SDL_Point Obstacle::getRightCenter() {
+		return SDL_Point{ getRect().x + getRect().w, getRect().y + (getRect().h / 2) };
 	}
 
 	void Obstacle::draw() {

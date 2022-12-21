@@ -55,7 +55,7 @@ namespace cwing {
 	}
 
 	void PlayState::stateEvents(SDL_Event& event) {
-		if (event.type == SDL_MOUSEBUTTONDOWN) {
+/* 		if (event.type == SDL_MOUSEBUTTONDOWN) {
 			for (Sprite* s : ge.getSprites()) {
 				s->mouseDown(event);
 			}
@@ -64,7 +64,7 @@ namespace cwing {
 			for (Sprite* s : ge.getSprites()) {
 				s->mouseUp(event);
 			}
-		}
+		} */
 		if (event.type == SDL_KEYDOWN) {
 			for (Sprite* s : ge.getSprites()) {
 				s->keyDown(event);

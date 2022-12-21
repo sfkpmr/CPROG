@@ -7,7 +7,7 @@
 namespace cwing{
     Powerup::Powerup(int x, int y, int w, int h): Sprite(x, y, w, h){
         texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "star.png").c_str());
-        hidden = false;
+        //hidden = false;
         setSpriteType("powerup");
     }
 
@@ -23,14 +23,14 @@ namespace cwing{
         
     }
 
-    bool Powerup::getHidden(){
+/*     bool Powerup::getHidden(){
         return hidden;
     }
 
     void Powerup::hide(){
         hidden = !hidden;
         std::cout << hidden << std::endl;
-    }
+    } */
 
     Powerup::~Powerup(){
         SDL_DestroyTexture(texture);

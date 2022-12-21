@@ -13,8 +13,9 @@ namespace cwing {
 		//char moveOne, moveTwo;
 		int playerId;
 		double velocityY;
-	public:
 		Paddle(int x, int y, int width, int height, int speed, int player);
+	public:
+		static Paddle* getInstance(int x, int y, int width, int height, int speed, int player);
 		int getPlayerID() const;
 		void keyDown(const SDL_Event& eve);
 		void keyUp(const SDL_Event& eve);

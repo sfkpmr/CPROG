@@ -18,18 +18,18 @@ private:
 	Ball(int x, int y, int w, int h, int speed);
 	double velocityX, velocityY;
 	//std::string direction = "UP";
-	int ticksSinceLH;
+	//int ticksSinceLH;
 public:
 	static Ball* getInstance(int x, int y, int w, int h, int speed);
 	//void draw();
 	//bool checkBounds();
 	void paddleCollision();
 	void obstacleCollision();
-	SDL_Point* getCenter();
+	SDL_Point getCenter();
 	int getClosestObsticle(Obstacle* o); //change name?
 	void tick();
-	double getVelocityX() { return velocityX; }
-	void setVelocityX(double v) { velocityX = v; }
+	double& getVelocityX() { return velocityX; }
+	//void setVelocityX(double v) { velocityX = v; }
 	~Ball();
 };
 

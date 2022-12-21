@@ -11,13 +11,11 @@ namespace cwing {
 		static Obstacle* getInstance(int x, int y, int w, int h);
 		virtual void draw();
 		virtual void tick(){}
-		SDL_Point* getTopCenter();
-		SDL_Point* getBottomCenter();
-		SDL_Point* getLeftCenter();
-		SDL_Point* getRightCenter();
+		SDL_Point getTopCenter();
+		SDL_Point getBottomCenter();
+		SDL_Point getLeftCenter();
+		SDL_Point getRightCenter();
 		~Obstacle();
 	};
 }
-
-
 #endif

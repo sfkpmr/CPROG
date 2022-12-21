@@ -8,7 +8,7 @@ namespace cwing {
 	private:
 		//int x, y, w, h;
 		//std::string direction;
-		int speed;
+		int speed, oldSpeed;
 		//int directionX;
 		//int directionY;
 	protected:
@@ -16,7 +16,8 @@ namespace cwing {
 		SDL_Texture* texture; //not protected 
 	public:
 		int getSpeed() const;
-		void setSpeed();
+		void setSpeed(double newSpeed);
+		void resetSpeed();
 		void draw(); //virtual eller ej???
 		void tick() {}
 		//vitual dest?

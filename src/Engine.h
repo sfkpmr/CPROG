@@ -11,21 +11,21 @@ namespace cwing {
 	class Engine
 	{
 	public:
-		void add(Sprite* c); // skapa och addera komponenter
-		void remove(Sprite* c);
+		void add(Sprite* s); // skapa och addera komponenter
+		void remove(Sprite* s);
 		std::vector<Sprite*> getSprites() const;
 		bool* getKeyStateCheck();
 		bool* getScoreCollision();
 		void setCurrentState(GameState* state);
 		GameState* getCurrentState();
-		void run(); // en händelse loop, vänter på nästa händelse och sen går igenom komponenter och anropar deras motsvarande event-handetings metod
+		void run(); // en hï¿½ndelse loop, vï¿½nter pï¿½ nï¿½sta hï¿½ndelse och sen gï¿½r igenom komponenter och anropar deras motsvarande event-handetings metod
 		~Engine();
 	private:
-		std::vector<Sprite*> sprites; //innehåller sprites som ska behandlas under iterering
-		std::vector<Sprite*> added; //innehåller objekt som adderas före iterering
-		std::vector<Sprite*> removed; //innehåller sprites som tas bort under iterering
+		std::vector<Sprite*> sprites; //innehÃ¥ller sprites som ska behandlas under iterering
+		std::vector<Sprite*> added; //innehÃ¥ller objekt som adderas fï¿½re iterering
+		std::vector<Sprite*> removed; //innehÃ¥ller sprites som tas bort under iterering
 		GameState* currentState = NULL;
-		bool keyStateCheck[4] = {}; //FRÅGA OM RÄTT
+		bool keyStateCheck[4] = {}; //FRÃ…GA OM RÃ„TT
 		bool scoreCollision[2] = {};
 	};
 	extern Engine ge;

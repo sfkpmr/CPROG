@@ -14,14 +14,15 @@ using namespace std;
 using namespace cwing;
 
 int main(int argc, char** argv) {
-	//Engine ge;
 
 	//Sprite* ball = Ball::getInstance(500 - 25, 300 - 25, 50, 50, 10);
-	Sprite* ball = Ball::getInstance(475, 275, 25, 25, 8);
-	Sprite* paddle_l = new Paddle(10, 250, 20, 100, 8, 2);
-	Sprite* paddle_r = new Paddle(970, 250, 20, 100, 8, 1);
+	Sprite* ball = Ball::getInstance(485, 275, 25, 25, 8);
+	Sprite* paddle_l = Paddle::getInstance(10, 250, 20, 100, 8, 2);
+	Sprite* paddle_r = Paddle::getInstance(970, 250, 20, 100, 8, 1);
 	Sprite* hinder = Obstacle::getInstance(100,100,100,100);
-	Sprite* powerUp = Powerup::getInstance(300,300,100,100);
+/* 	Sprite* powerUp1 = Powerup::getInstance(300,300,30,30);
+	Sprite* powerUp2 = Powerup::getInstance(600,150,30,30);
+	Sprite* powerUp3 = Powerup::getInstance(400,250,30,30); */
 /* 	Sprite* hinder1 = Obstacle::getInstance(200,200,50,50);
 	Sprite* hinder2 = Obstacle::getInstance(400,400,50,50);
 	Sprite* hinder3 = Obstacle::getInstance(500,300,50,50); */
@@ -34,7 +35,9 @@ int main(int argc, char** argv) {
 	ge.add(paddle_r);
 	ge.add(ball);
 	ge.add(hinder);
-	ge.add(powerUp);
+/* 	ge.add(powerUp1);
+	ge.add(powerUp2);
+	ge.add(powerUp3); */
 /* 	ge.add(hinder1);
 	ge.add(hinder2);
 	ge.add(hinder3); */

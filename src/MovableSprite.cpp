@@ -5,7 +5,7 @@
 
 namespace cwing {
 
-	MovableSprite::MovableSprite(int x, int y, int w, int h, int speed): Sprite(x, y, w, h), speed(speed) {
+	MovableSprite::MovableSprite(int x, int y, int w, int h, int speed): Sprite(x, y, w, h), speed(speed), oldSpeed(speed) {
 		
 	}
 
@@ -13,8 +13,12 @@ namespace cwing {
 		return speed;
 	}
 
-	void MovableSprite::setSpeed(){
-		speed *= 1.5;
+	void MovableSprite::setSpeed(double newSpeed){
+		speed *= newSpeed;
+	}
+
+	void MovableSprite::resetSpeed(){
+		speed = oldSpeed;
 	}
 
 	void MovableSprite::draw() {
