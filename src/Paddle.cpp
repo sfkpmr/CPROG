@@ -2,8 +2,8 @@
 #include "Constants.h"
 #include "System.h"
 #include "Engine.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 namespace cwing {
 	//const Uint8* keyStates = SDL_GetKeyboardState(NULL); //fel plats?

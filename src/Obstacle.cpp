@@ -1,10 +1,10 @@
 #include "Obstacle.h"
 #include "System.h"
 #include "Constants.h"
-#include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 
 namespace cwing {
-	Obstacle::Obstacle(int x, int y, int w, int h): Sprite(x, y, w, h) {
+	Obstacle::Obstacle(int x, int y, int w, int h) : Sprite(x, y, w, h) {
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "hinder.png").c_str());
 		setSpriteType("obstacle");
 	}
@@ -31,6 +31,15 @@ namespace cwing {
 
 	void Obstacle::draw() {
 		SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
+	}
+
+	bool Obstacle::checkIfWithinArea(SDL_Point p) {
+
+		if ((p.x >= getRect().x && p.x <= getRect().x + getRect().w) && (p.y >= getRect().y && p.y <= getRect().y + getRect().h)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	Obstacle::~Obstacle() {

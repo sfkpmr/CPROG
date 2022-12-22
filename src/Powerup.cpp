@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "System.h"
 #include <iostream>
-#include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 
 namespace cwing{
     Powerup::Powerup(int x, int y, int w, int h): Sprite(x, y, w, h){

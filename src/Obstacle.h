@@ -10,11 +10,12 @@ namespace cwing {
 	public:
 		static Obstacle* getInstance(int x, int y, int w, int h);
 		virtual void draw();
-		virtual void tick(){}
+		virtual void tick() {}
 		SDL_Point getTopCenter();
 		SDL_Point getBottomCenter();
 		SDL_Point getLeftCenter();
 		SDL_Point getRightCenter();
+		bool checkIfWithinArea(SDL_Point p);
 		~Obstacle();
 	};
 }

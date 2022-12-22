@@ -1,5 +1,5 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include "Ball.h"
 #include "MovableSprite.h"
 #include "Constants.h"
@@ -12,7 +12,7 @@
 #include <iostream>
 
 namespace cwing {
-	
+
 	Ball::Ball(int x, int y, int w, int h, int speed) : MovableSprite(x, y, w, h, speed) { //, velocityX(getSpeed()), velocityY(0)
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "pong_ball.png").c_str());
 		velocityX = getSpeed(); // alltid rörs i x
@@ -50,16 +50,17 @@ namespace cwing {
 						double normalizeRY = relativeY / (p->getRect().h / 2);
 						if (normalizeRY > 1) {
 							normalizeRY = 1;
-						} 
+						}
 						if (normalizeRY < -1) {
 							normalizeRY = -1;
-						} 
+						}
 						double angle = normalizeRY * (13 * 3.14 / 36); //(5 * 3.14 / 12) -> max 75 grader. Byta till static const MAXANGLE?
 						velocityX = -getSpeed() * cos(angle);
 						velocityY = getSpeed() * -sin(angle);
 						sys.playSfx("p_hit4416.wav");
 					}
-				} else if (p->getPlayerID() == 2) {
+				}
+				else if (p->getPlayerID() == 2) {
 					if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
 						double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var p� paddle tr�ffar bollen
 						//d� paddle kan vara olika i h�jd, beh�ver vi normalisera relativeY s� vi f�r nummer mellar -1 och 1, och inte -5 och 5 om paddle �r 10 pixel h�g
@@ -77,7 +78,7 @@ namespace cwing {
 					}
 				}
 			}
-		}	
+		}
 	}
 
 	void Ball::obstacleCollision() {
@@ -103,6 +104,25 @@ namespace cwing {
 				if (SDL_HasIntersection(&getRect(), &(o->getRect()))) {
 					//std::cout << getRect().x << "  " << getRect().y << std::endl;
 					int temp = getClosestObsticle(o);
+					if (o->checkIfWithinArea(getCenter())) {
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						std::cout << "FORCE MOVE" << std::endl;
+						ge.remove(this);
+						Ball* b = Ball::getInstance(obstacleCollisionPoint.x, obstacleCollisionPoint.y, 25, 25, getSpeed());
+						b->getVelocityX() = -velocityXAtCollision;
+						b->getVelocityX() = -velocityYAtCollision;
+						ge.add(b);
+					}
+					obstacleCollisionPoint = getCenter();
+					velocityXAtCollision = velocityX;
+					velocityYAtCollision = velocityY;
+					std::cout << "I collided at " << obstacleCollisionPoint.x << "," << obstacleCollisionPoint.y << std::endl;
 					if (temp == 1) { //TOP
 						std::cout << "Top" << std::endl;
 						//double relativeTop = (o->getRect().x + (o->getRect().w / 2)) - (getRect().x + (getRect().w / 2));
@@ -118,7 +138,8 @@ namespace cwing {
 						//velocityY = -getSpeed() * -sin(angle);
 						velocityY = -velocityY;
 						sys.playSfx("p_hit4416.wav");
-					} else if (temp == 2) { //BUTTOM
+					}
+					else if (temp == 2) { //BUTTOM
 						std::cout << "Bottom" << std::endl;
 						//double relativeBottom = (o->getRect().x + (o->getRect().w / 2)) - (getRect().x + (getRect().w / 2));
 						//double normalizeRYTop = relativeBottom / (o->getRect().w / 2);
@@ -134,7 +155,8 @@ namespace cwing {
 
 						velocityY = -velocityY;
 						sys.playSfx("p_hit4416.wav");
-					} else if (temp == 3) { //LEFT
+					}
+					else if (temp == 3) { //LEFT
 						std::cout << "Left" << std::endl;
 						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var p� paddle tr�ffar bollen
 						////d� paddle kan vara olika i h�jd, beh�ver vi normalisera relativeY s� vi f�r nummer mellar -1 och 1, och inte -5 och 5 om paddle �r 10 pixel h�g
@@ -151,7 +173,8 @@ namespace cwing {
 						std::cout << "vel left: " << velocityX << " " << -velocityX << std::endl;
 						velocityX = -velocityX;
 						sys.playSfx("p_hit4416.wav");
-					} else if (temp == 4) { //RIGHT
+					}
+					else if (temp == 4) { //RIGHT
 						std::cout << "Right" << std::endl;
 						//double relativeY = (o->getRect().y + (o->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); //var p� paddle tr�ffar bollen
 						////d� paddle kan vara olika i h�jd, beh�ver vi normalisera relativeY s� vi f�r nummer mellar -1 och 1, och inte -5 och 5 om paddle �r 10 pixel h�g
@@ -168,15 +191,16 @@ namespace cwing {
 						std::cout << "vel right: " << velocityX << " " << -velocityX << std::endl;
 						velocityX = -velocityX;
 						sys.playSfx("p_hit4416.wav");
-					} 
-/* 					else if (temp == 5) {
-						velocityX = -velocityX;
-						velocityY = -velocityY;
-					} */					
+					}
+					/* 					else if (temp == 5) {
+											velocityX = -velocityX;
+											velocityY = -velocityY;
+										} */
 				}
-			} else if (s->getSpriteType() == "powerup"){ // ändra till getSpriteType? s->getSpriteType() == "powerup"
-			    Powerup* p = dynamic_cast<Powerup*>(s);
-				if(SDL_HasIntersection(&getRect(), &(p->getRect()))){// && p->getHidden() == false
+			}
+			else if (s->getSpriteType() == "powerup") { // ändra till getSpriteType? s->getSpriteType() == "powerup"
+				Powerup* p = dynamic_cast<Powerup*>(s);
+				if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {// && p->getHidden() == false
 					setSpeed(1.25);
 					//velocityX = getSpeed();
 					//velocityY = getSpeed();
@@ -197,7 +221,7 @@ namespace cwing {
 		SDL_Point right = obs->getBottomCenter(); // was bottom, vi vet det fucked
 		SDL_Point top = obs->getLeftCenter();
 		SDL_Point bottom = obs->getRightCenter(); // was right, vi vet det fucked
-		std::cout << top.x << "-" << top.y << "-" << bottom.x << "-" <<bottom.y << "-" <<left.x << "-" <<left.y << "-" <<right.x << "-" <<right.y << std::endl;
+		std::cout << top.x << "-" << top.y << "-" << bottom.x << "-" << bottom.y << "-" << left.x << "-" << left.y << "-" << right.x << "-" << right.y << std::endl;
 		/*double topDistance = sqrt(pow(temp->x - temp->y, 2) + pow(top->x - top->y, 2));
 		double bottomDistance = sqrt(pow(temp->x - temp->y, 2) + pow(bottom->x - bottom->y, 2));
 		double leftDistance = sqrt(pow(temp->x - temp->y, 2) + pow(left->x - left->y, 2));
@@ -218,12 +242,12 @@ namespace cwing {
 		else if (leftDistance < topDistance && leftDistance < bottomDistance && leftDistance < rightDistance) {
 			test = 3;
 		}
-		else if (rightDistance < topDistance && rightDistance < bottomDistance && rightDistance < leftDistance){
+		else if (rightDistance < topDistance && rightDistance < bottomDistance && rightDistance < leftDistance) {
 			test = 4;
 		}
 		else {
 			//throw std::invalid_argument("Fucked");
-			for(int i = 0; i < 10; i++){
+			for (int i = 0; i < 10; i++) {
 				std::cout << "Fucked" << std::endl;
 			}
 			test = 5;
@@ -236,7 +260,7 @@ namespace cwing {
 		//delete bottom;
 		return test;
 	}
-	
+
 	void Ball::tick() {
 		// e i konstruktor nu
 		//velocityX = getSpeed(); // alltid r�rs i x
@@ -252,23 +276,25 @@ namespace cwing {
 			//velocityX = -velocityX;
 			Ball* b = Ball::getInstance(485, 275, 25, 25, getSpeed());
 			b->getVelocityX() = -getSpeed();
-			ge.add(b);	
-/* 			ge.add(getInstance(485, 275, 25, 25, getSpeed()));
-			velocityX = -getSpeed(); */
-					
-		} else if (getRect().x <= 0) {
+			ge.add(b);
+			/* 			ge.add(getInstance(485, 275, 25, 25, getSpeed()));
+						velocityX = -getSpeed(); */
+
+		}
+		else if (getRect().x <= 0) {
 			ge.getScoreCollision()[0] = true;
 			sys.playSfx("score4416.wav");
 			ge.remove(this);
 			//Ball* ball = Ball::getInstance(475, 275, 25, 25, 12);
-			resetSpeed();		
-			ge.add(getInstance(485, 275, 25, 25, getSpeed()));		
-		} 
-		
+			resetSpeed();
+			ge.add(getInstance(485, 275, 25, 25, getSpeed()));
+		}
+
 		if (getRect().y <= 0) {
 			velocityY = -velocityY;
 			sys.playSfx("w_hit4416.wav");
-		} else if ((getRect().y + getRect().h) >= sys.getHeight()) {
+		}
+		else if ((getRect().y + getRect().h) >= sys.getHeight()) {
 			velocityY = -velocityY;
 			sys.playSfx("w_hit4416.wav");
 		}

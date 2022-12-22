@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Sprite.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "System.h"
 #include "PlayState.h"
 #include <iostream>

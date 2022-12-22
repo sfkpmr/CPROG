@@ -1,7 +1,7 @@
 #ifndef PLAYSTATE_H
 #define PLAYSTATE_H
 #include "GameState.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 namespace cwing {
 	class PlayState: public GameState

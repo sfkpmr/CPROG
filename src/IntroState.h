@@ -1,7 +1,7 @@
 #ifndef INTROSTATE_H
 #define INTROSTATE_H
 #include "GameState.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 
 namespace cwing {

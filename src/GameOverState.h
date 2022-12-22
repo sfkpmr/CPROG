@@ -1,8 +1,8 @@
 #ifndef GAMEOVERSTATE_H
 #define GAMEOVERSTATE_H
 #include "GameState.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 namespace cwing {
 	class GameOverState: public GameState
