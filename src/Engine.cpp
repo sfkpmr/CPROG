@@ -1,20 +1,18 @@
 #include "Engine.h"
-#include "Sprite.h"
-#include <SDL.h>
 #include "System.h"
-#include "PlayState.h"
+#include "IntroState.h"
+#include <SDL2/SDL.h>
 #include <iostream>
+
 namespace cwing {
+#define FPS 60 //antal frames per sekund. FPS för att kunna styra hastigheten av spelet, samt att hastigheten blir samma på olika datorer
 
-#define FPS 60 //antal frames per sekund. FPS f�r att kunna styra hastigheten av spelet, samt att hastigheten blir samma p� olika datorer
-
-	void Engine::add(Sprite* c) {
-		added.push_back(c);  //vi adderar sprites f�rst till en tempor�r vector, f�r att slippa addera komponenter under loopens g�ng
+	void Engine::add(Sprite* s) {
+		added.push_back(s);  //vi adderar sprites först till en temporär vector först, för att slippa addera komponenter under loopens gång
 	}
 
-	void Engine::remove(Sprite* c) {
-		removed.push_back(c); //adderar sprites till en tempor�r vector f�rst n�r de tas bort
-		//std::cout << removed.size() << std::endl;
+	void Engine::remove(Sprite* s) {
+		removed.push_back(s); //adderar sprites till en temporär vector först, för att slippa ta bort komponenter under loopens gång
 	}
 
 	void Engine::run() {
@@ -22,14 +20,14 @@ namespace cwing {
 		//GameState* gState = new GameState();
 		//GameState* currentState = gState->getCurrentState();
 		//currentState = IntroState::getInstance();
-		currentState = IntroState::getInstance();
+		currentState = std::move(std::make_unique<IntroState>());
 		currentState->enterState();
 		//currentState->setCurrentState(currentState);
 		//currentState->getCurrentState()->enterState();
-		bool quit = false; 
-		Uint32 tInterval = 1000 / FPS; //hur m�nga milisekunder programmet ska dr�ja mellan ticks
+		quit = false; 
+		Uint32 tInterval = 1000 / FPS; //hur många milisekunder programmet ska dröja mellan ticks
 		while (!quit) {
-			Uint32 nextTick = SDL_GetTicks() + tInterval; //nextTick r�knar ur n�r n�sta tick ska vara. SDL_GetTicks() returnerar antal milisekunder sen initieringen utav SDL
+			Uint32 nextTick = SDL_GetTicks() + tInterval; //nextTick räknar ur när nästa tick ska vara. SDL_GetTicks() returnerar antal milisekunder sen initieringen utav SDL
 			SDL_Event eve;
 			while (SDL_PollEvent(&eve) != 0) { // != 0 needed?
 				if (eve.type == SDL_QUIT) {
@@ -38,54 +36,68 @@ namespace cwing {
 				currentState->stateEvents(eve);
 			} //in while
 			//std::cout << removed.size() << std::endl;
+			if (quit == true) {
+				for (Sprite* s : sprites) {
+					delete s;
+				}
+				//delete currentState;
+				break;
+			}
 			currentState->updateState();
 			  
 			currentState->changeState();
 			//std::cout << " Out tick: " << SDL_GetTicks() << " " << sprites.size() << std::endl;
 			for (Sprite* s : added) {
 				//std::cout << "tick: " << SDL_GetTicks() << " " << added.size() << std::endl;
-				sprites.push_back(s); //vi �verf�r alla komponenter fr�n added till comps n�r vi inte l�ngre itererar �ver den
+				sprites.push_back(s); //vi överför alla komponenter från added till comps när vi inte längre itererar över den
 				//std::cout << sprites.size() << std::endl;
 			}
 			added.clear(); //rensar vektorn
 			//std::cout << "After added loop " << sprites.size() << std::endl;
 			//std::cout << removed.size() << std::endl;
-			 //bara en check
-			for (Sprite* s : removed) { 
+			//bara en check
+			for (Sprite* s : removed) {
 				//std::cout << "Should delete" << std::endl;
 				for (std::vector<Sprite*>::iterator i = sprites.begin(); i != sprites.end();) {
 					if (*i == s) { // vi kollar om pekaren c finns i removed vektorn och tar bort den
-						i = sprites.erase(i); //i= f�r att erase() returnerar iterator p� det f�rsta elementet som �r kvar i vektorn, efter i
-						std::cout << "removed" << std::endl;
+						delete *i;
+						i = sprites.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i
+						//delete *i;
+						//i = sprites.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i
 					} else {
-						i++; //i++ �r i else d� vi vill inte �ka iteratorn om ett element tas bort
+						i++; //i++ är i else då vi vill inte öka iteratorn om ett element tas bort
 					}
 				}
 			}
 			removed.clear();
-			//F�rg till renderaren
-			//SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
-			//g�r igenom alla komponenter efter eventet och ritar de i det nya tillst�ndet. F�r att rita up llla h�ndelse m�ste man sudda sk�rmen f�rst RClear
+
 			SDL_RenderClear(sys.getRen());
 			sys.drawSysBG(); //ritar bakgrund
 			currentState->renderState();
-			//sen ska man skriva ut, presentera fr�n renderaren till sk�rmen efter ritningen
+			//sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
 			SDL_RenderPresent(sys.getRen());
-			//i slutet av loopen, efter allt ritas ut, r�knar vi tid kvar till n�sta tick
+			//Färg till renderaren
+			//SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
+			//går igenom alla komponenter efter eventet och ritar de i det nya tillståndet. För att rita up llla händelse måste man sudda skärmen först RClear
+			//SDL_RenderClear(sys.getRen());
+			//sys.drawSysBG(); //ritar bakgrund
+			//currentState->renderState();
+			////sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
+			//SDL_RenderPresent(sys.getRen());
+			//i slutet av loopen, efter allt ritas ut, räknar vi tid kvar till nästa tick
 			int delay = nextTick - SDL_GetTicks();
-			if (delay > 0) { // delay �r 0 eller negativ om det inte finns n�g kvar 
+			if (delay > 0) { // delay är 0 eller negativ om det inte finns någ kvar 
 				SDL_Delay(delay);
 			} 
 			//std::cout << "getSprites " << sprites.size() << std::endl;
 		}//out while
 	}
 
-	std::vector<Sprite*> Engine::getSprites() const {
-		//std::cout << "getSprites " << sprites.size() << std::endl;
+	const std::vector<Sprite*> Engine::getSprites() const {
 		return sprites;
 	}
 
-	bool* Engine::getKeyStateCheck() { //referens return inte pointer?
+	bool* Engine::getKeyStateCheck() {
 		return keyStateCheck;
 	}
 
@@ -93,16 +105,24 @@ namespace cwing {
 		return scoreCollision;
 	}
 
-	void Engine::setCurrentState(GameState* state) {
-		currentState = state;
+	bool& Engine::getQuit() {
+		return quit;
 	}
 
-	GameState* Engine::getCurrentState() {
-		return currentState;
+	void Engine::setMaxScore(int max){
+		maxScore = max;
 	}
 
-	Engine::~Engine() {
+	const int Engine::getMaxScore() const {
+		return maxScore;
+	}
 
+	void Engine::setCurrentState(std::unique_ptr<GameState> state) {
+		currentState = std::move(state);
+	}
+
+	GameState* Engine::getCurrentState() const {
+		return currentState.get();
 	}
 
 	Engine ge;

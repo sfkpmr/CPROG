@@ -1,15 +1,17 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#include <memory>
 
 namespace cwing {
 	class GameState
 	{
 	private:
 		//GameState* currentState = NULL;
-		GameState* nextState = NULL;
+		std::unique_ptr<GameState> nextState;
 	public:
-		void setNextState(GameState* state);
+		void setNextState(std::unique_ptr<GameState> state);
+		//GameState* getNextState() const;
 		//GameState* getCurrentState();
 		//void setCurrentState(GameState* state);
 		void changeState();

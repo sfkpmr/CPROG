@@ -8,13 +8,11 @@ namespace cwing {
 	private:
 		int score {0}; //initiera i cpp constructor?
 		int playerID {0};
-		//bool scored;
 		Score(int x, int y, int fontSize, int playerID);
 	public:
 		static Score* getInstance(int x, int y, int fontSize, int playerID);
 		void tick();
-		//bool checkIfScored(); //Om inget s�tt att fixa Score update genom det, ta bort. Just nu hanteras via tick() och en array i Engine
-		int getScore();
+		const int getScore() const;
 	};
 }
 #endif

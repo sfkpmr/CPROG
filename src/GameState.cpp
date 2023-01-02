@@ -4,9 +4,13 @@
 
 namespace cwing {
 
-	void GameState::setNextState(GameState* state) {
-		nextState = state;
+	void GameState::setNextState(std::unique_ptr<GameState> state) {
+		nextState = std::move(state);
 	}
+
+	//GameState* GameState::getNextState() const {
+	//	return nextState;
+	//}
 
 	//GameState* GameState::getCurrentState() {
 	//	return currentState;
@@ -17,18 +21,20 @@ namespace cwing {
 	//}
 
 	void GameState::changeState() {
-		if (nextState != NULL) { //kollar om det finns ett state att byta till
+		if (nextState != nullptr) { //kollar om det finns ett state att byta till
 			//std::cout << "change state" << std::endl;
-			//currentState->exitState(); //anropar exitState funktionen hos nuvarande state och avslutar den
+			//getCurrentState->exitState(); //anropar exitState funktionen hos nuvarande state och avslutar den
 			ge.getCurrentState()->exitState();
-			nextState->enterState(); //anropar ny state entersState funktionen och p�b�rjar den
+			ge.setCurrentState(std::move(nextState));
+			ge.getCurrentState()->enterState(); //anropar ny state entersState funktionen och påbörjar den
 			//currentState = nextState; //sparar nya staten
-			ge.setCurrentState(nextState);
-			nextState = NULL; //g�r om nextState till NULL tills nuvarande state �r klar
+			//nextState.release(); //gör om nextState till NULL tills nuvarande state är klar
+			//nextState.release();
 		}
 	}
 
 	GameState::~GameState() {
-
+		std::cout << "GS dest" << std::endl;
+		//delete nextState;
 	}
 }

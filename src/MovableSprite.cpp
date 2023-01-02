@@ -9,7 +9,7 @@ namespace cwing {
 		
 	}
 
-	int MovableSprite::getSpeed() const {
+	const int MovableSprite::getSpeed() const {
 		return speed;
 	}
 
@@ -20,14 +20,7 @@ namespace cwing {
 	void MovableSprite::resetSpeed(){
 		speed = oldSpeed;
 	}
-
-	void MovableSprite::draw() {
-		//const SDL_Rect& rect = getRect();
-		//SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
-		SDL_RenderCopy(sys.getRen(), texture, NULL, &getRect());
-	}
-	
-	
+		
 	MovableSprite::~MovableSprite() {
 		std::cout << "MS dest anropas" << std::endl;
 	}

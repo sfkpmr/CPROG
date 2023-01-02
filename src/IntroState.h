@@ -1,21 +1,22 @@
 #ifndef INTROSTATE_H
 #define INTROSTATE_H
 #include "GameState.h"
-#include <SDL.h>
-
+#include <SDL2/SDL.h>
+#include <memory>
 
 namespace cwing {
 	class IntroState: public GameState
 	{
-	private:
-		IntroState();
 	public:
-		static IntroState* getInstance();
+		IntroState();
+		static std::unique_ptr<GameState> getInstance();
+		//IntroState();
 		void enterState();
 		void updateState();
 		void exitState();
 		void stateEvents(SDL_Event& event);
 		void renderState();
+		~IntroState(); //b inte?
 	};
 }
 #endif

@@ -1,8 +1,9 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
-#include <SDL.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_image.h>
 #include <string>
 
 namespace cwing {
@@ -12,22 +13,22 @@ namespace cwing {
 	public:
 		System();
 		~System();
-
 		SDL_Renderer* getRen() const;
-		//TTF_Font* getFont() const;
-		int getWidth() const;
-		int getHeight() const;
+		const int getWidth() const;
+		const int getHeight() const;
 		void drawSysBG();
 		void playSfx(std::string sfx);
-
+		void setVertical();
+		const std::string getOrientation() const;
 	private:
 		SDL_Window* win;
 		SDL_Renderer* ren;
-		//TTF_Font* font;
 		SDL_Texture* tex;
 		Mix_Chunk* audio;
-		int width = 1000;
-		int height = 600;
+		std::string orientation;
+		std::string background;
+		int width;
+		int height;
 	};
 	//extern betyder att alla som inkluderar filen f�r deklaration om att det finns n�nstans ett objekt sys av typen System
 	extern System sys;

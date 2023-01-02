@@ -6,24 +6,16 @@ namespace cwing {
 	class MovableSprite: public Sprite
 	{
 	private:
-		//int x, y, w, h;
-		//std::string direction;
 		int speed, oldSpeed;
-		//int directionX;
-		//int directionY;
 	protected:
-		MovableSprite(int x, int y, int w, int h, int speed); //https://stackoverflow.com/a/16814901 
-		SDL_Texture* texture; //not protected 
+		MovableSprite(int x, int y, int w, int h, int speed); 
 	public:
-		int getSpeed() const;
+		const int getSpeed() const;
 		void setSpeed(double newSpeed);
 		void resetSpeed();
-		void draw(); //virtual eller ej???
+		void draw() {}
 		void tick() {}
-		//vitual dest?
 		virtual ~MovableSprite();
 	};
 }
-
-
 #endif

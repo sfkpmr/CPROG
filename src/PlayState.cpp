@@ -3,50 +3,66 @@
 #include "Ball.h"
 #include "Score.h"
 #include "Engine.h"
+#include "System.h"
 #include "GameOverState.h"
 #include <iostream>
 
 namespace cwing {
 
 	PlayState::PlayState(): GameState() {
-
+		//nextState = GameOverState::getInstance();
 	}
 
-	PlayState* PlayState::getInstance() {
-		return new PlayState();
+	std::unique_ptr<GameState> PlayState::getInstance() {
+		return std::make_unique<PlayState>();
 	}
 
 	void PlayState::enterState() {
-		Sprite* score_l = Score::getInstance(280, 30, 40, 2);
-		Sprite* score_r = Score::getInstance(700, 30, 40, 1);
-		ge.add(score_l);
-		ge.add(score_r);
+		if(sys.getOrientation() == "H"){
+			Sprite* score_l = Score::getInstance(390, 15, 40, 2);
+			Sprite* score_r = Score::getInstance(485, 15, 40, 1);
+			ge.add(score_l);
+			ge.add(score_r);
+		} else {
+			Sprite* score_top = Score::getInstance(20, 400, 40, 2);
+		    Sprite* score_bottom = Score::getInstance(560, 460, 40, 1);
+		    ge.add(score_top);
+		    ge.add(score_bottom);
+		}
 	}
 
 	void PlayState::updateState() {
-		//std::cout << "Play" << std::endl;
 		for (Sprite* s : ge.getSprites()) {
 			s->tick();
 		}
 
 		for (Sprite* s : ge.getSprites()) {
-			if (Score* sc = dynamic_cast<Score*>(s)) {
-				if (sc->getScore() == 5) {
-					setNextState(GameOverState::getInstance());
+			if (s->getSpriteType() == "score") {
+				Score* sc = dynamic_cast<Score*>(s);
+				if(ge.getMaxScore() == 0) {
+					if (sc->getScore() == 5) {
+						//std::unique_ptr<GameState> gos = std::make_unique<GameOverState>();
+						setNextState(std::move(GameOverState::getInstance()));
+					}
+				} else {
+					if (sc->getScore() == ge.getMaxScore()) {
+						//std::unique_ptr<GameState> gos = std::make_unique<GameOverState>();
+						setNextState(std::move(GameOverState::getInstance()));
+					}
 				}
 			}
 		}
 	}
 
 	void PlayState::exitState() {
-		for (int i = 0; i < 4; i++) { // fixar paddle g�r efter game over state, om key gick blev aldrig upp
+		for (int i = 0; i < 4; i++) { // fixar paddles går vid game over state, om key blev aldrig upp
 			ge.getKeyStateCheck()[i] = false;
 		}
-/* 		for(Sprite* s : ge.getSprites()){
-			if(s->getSpriteType() == "ball"){
-				ge.remove(s);
-			}
-		} */
+		//for (Sprite* s : ge.getSprites()) {
+		//	if (Score* sc = dynamic_cast<Score*>(s)) {
+		//		ge.remove(s);
+		//	}
+		//}
 		//for (Sprite* s : ge.getSprites()) {
 		//	if (Ball* b = dynamic_cast<Ball*>(s)) {
 		//		ge.remove(s);
@@ -55,16 +71,6 @@ namespace cwing {
 	}
 
 	void PlayState::stateEvents(SDL_Event& event) {
-/* 		if (event.type == SDL_MOUSEBUTTONDOWN) {
-			for (Sprite* s : ge.getSprites()) {
-				s->mouseDown(event);
-			}
-		}
-		if (event.type == SDL_MOUSEBUTTONUP) {
-			for (Sprite* s : ge.getSprites()) {
-				s->mouseUp(event);
-			}
-		} */
 		if (event.type == SDL_KEYDOWN) {
 			for (Sprite* s : ge.getSprites()) {
 				s->keyDown(event);
@@ -75,30 +81,6 @@ namespace cwing {
 				s->keyUp(event);
 			}
 		}
-		//switch (event.type) {
-		//case SDL_MOUSEBUTTONDOWN: // kommer inte beh�vas??
-		//	//efter att ha tagit emot h�ndelse i loopen g�r vi igenom alla komponent och anropar deras funktioner f�r 
-		//	//att hantera den typen av h�ndelsen och de updaterar sig
-		//	for (Sprite* s : ge.getSprites()) {
-		//		s->mouseDown(event);
-		//	}
-		//	break;
-		//case SDL_MOUSEBUTTONUP: // samma?
-		//	for (Sprite* s : ge.getSprites()) {
-		//		s->mouseUp(event);
-		//	}
-		//	break;
-		//case SDL_KEYDOWN:
-		//	for (Sprite* s : ge.getSprites()) {
-		//		s->keyDown(event);
-		//	}
-		//	break;
-		//case SDL_KEYUP:
-		//	for (Sprite* s : ge.getSprites()) {
-		//		s->keyUp(event);
-		//	}
-		//	break;
-		//} //switch
 	}
 
 	void PlayState::renderState() {
@@ -106,4 +88,11 @@ namespace cwing {
 			s->draw();
 		}
 	}
+
+	PlayState::~PlayState() {
+		std::cout << "Play dest" << std::endl;
+	}
 }
+
+
+

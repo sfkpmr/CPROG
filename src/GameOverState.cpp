@@ -3,23 +3,31 @@
 #include "Engine.h"
 #include "Sprite.h"
 #include "IntroState.h"
+#include "System.h"
 #include <iostream>
 
 namespace cwing {
 
 	GameOverState::GameOverState(): GameState() {
-
+		//nextState = IntroState::getInstance();
 	}
 
-	GameOverState* GameOverState::getInstance() {
-		return new GameOverState();
+	std::unique_ptr<GameState> GameOverState::getInstance() {
+		return std::make_unique<GameOverState>();
 	}
 
 	void GameOverState::enterState() {
-		Text* gover = Text::getIntance(350, 100, "GAME OVER!", 60);
-		Text* again = Text::getIntance(300, 450, "Press ENTER to play again", 40);
-		ge.add(gover);
-		ge.add(again);
+		if(sys.getOrientation() == "H"){
+			Sprite* gOver = Text::getIntance(295, 100, "GAME OVER!", 60);
+			Sprite* pAgain = Text::getIntance(310, 450, "Press ESC to Quit", 40);
+			ge.add(gOver);
+			ge.add(pAgain);	
+		} else {
+			Sprite* gOver = Text::getIntance(145, 300, "GAME OVER!", 60);
+			Sprite* pAgain = Text::getIntance(150, 490, "Press ESC to Quit", 40);
+			ge.add(gOver);
+			ge.add(pAgain);
+		}
 	}
 
 	void GameOverState::updateState() {
@@ -38,8 +46,9 @@ namespace cwing {
 	}
 
 	void GameOverState::stateEvents(SDL_Event& event) {
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_RETURN) {
-			setNextState(IntroState::getInstance());
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
+			//std::unique_ptr<GameState> is = std::make_unique<IntroState>();
+			ge.getQuit() = true;
 		}
 	}
 
@@ -49,4 +58,8 @@ namespace cwing {
 		}
 	}
 
+	GameOverState::~GameOverState() {
+		//delete nextState;
+	}
 }
+

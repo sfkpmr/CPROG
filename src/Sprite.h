@@ -1,11 +1,18 @@
 #ifndef SPRITE_H
 #define SPRITE_H
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <string>
 
 namespace cwing {
 	class Sprite
 	{
+	private:
+		SDL_Rect rect;
+		std::string spriteType;
+		Sprite(const Sprite&) = delete;
+		const Sprite& operator=(const Sprite&) = delete;
+	protected:
+		Sprite(int x, int y, int w, int h);
 	public:
 		//virtual för att säkerställa att desktrutorer hos subklasser anropas när man tar bort ett objekt 
 		virtual ~Sprite();
@@ -22,21 +29,9 @@ namespace cwing {
 		virtual void draw() = 0; // abstract class, ingen generel implementering, subklasser m�ste definiera implementationen av draw()
 		virtual void tick() = 0; //f�r att kontrollera objekt n�r inget h�nder, updatera de. Ball ska ha den, d� den r�rs utan input, Paddle ska inte ha.
 		void setSpriteType(std::string type) {spriteType = type;}
-		std::string getSpriteType() {return spriteType;}
+		const std::string getSpriteType() const {return spriteType;} // check const
 		SDL_Rect& getRect() { return rect; }; // f�r att kunna ha �tkomst till rect
 		//SDL_Texture* getTexture() { return texture; };
-	protected:
-		//konstruktorn i protected f�r att vi vill inte att man ska skapa objekt utav komponent klassen, den �r bara en basklass till subklasser
-		//komponenter ska ha sina koordinater och storlek
-		Sprite(int x, int y, int w, int h);
-	private:
-		//SDL_Rect rect; //f�r att komponenter ska kunna ha sina koordinater
-		//h�r f�rbjuder vi kopiering respektive tilldelning
-		SDL_Rect rect;
-		std::string spriteType;
-		//SDL_Texture* texture;
-		Sprite(const Sprite&) = delete;
-		const Sprite& operator=(const Sprite&) = delete;
 	};
 }
 #endif

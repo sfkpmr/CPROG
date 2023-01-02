@@ -4,7 +4,6 @@
 
 namespace cwing {
 	Score::Score(int x, int y, int fontSize, int pID): Text(x, y, "0", fontSize), playerID(pID) {
-		//scored = false;
 		setSpriteType("score");
 	}
 
@@ -13,7 +12,6 @@ namespace cwing {
 	}
 
 	void Score::tick() {
-
 		if (ge.getScoreCollision()[0] && playerID == 1) {
 			score++;
 			setText(std::to_string(score));
@@ -25,11 +23,7 @@ namespace cwing {
 		}
 	}
 
-	int Score::getScore() {
+	const int Score::getScore() const {
 		return score;
 	}
-
-/* 	bool Score::checkIfScored() {
-		return scored;
-	} */
 }

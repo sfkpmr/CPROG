@@ -1,21 +1,22 @@
 #ifndef GAMEOVERSTATE_H
 #define GAMEOVERSTATE_H
 #include "GameState.h"
-#include <SDL.h>
-#include <SDL_image.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <memory>
 
 namespace cwing {
 	class GameOverState: public GameState
 	{
-	private:
-		GameOverState();
 	public:
-		static GameOverState* getInstance();
+		static std::unique_ptr<GameState> getInstance();
+		GameOverState();
 		void enterState();
 		void updateState();
 		void exitState();
 		void stateEvents(SDL_Event& event);
 		void renderState();
+		~GameOverState(); // b inte?
 	};
 }
 #endif

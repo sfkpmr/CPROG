@@ -8,26 +8,36 @@
 #include "PlayState.h"
 #include <iostream>
 
-
 namespace cwing {
 
 	IntroState::IntroState(): GameState() {
-
+		//nextState = PlayState::getInstance();
 	}
 
-	IntroState* IntroState::getInstance() {
-		return new IntroState();
+	std::unique_ptr<GameState> IntroState::getInstance() {
+		return std::make_unique<IntroState>();
 	}
 
 	void IntroState::enterState() {
-		Text* title = Text::getIntance(420, 100, "PONG.", 70);
-		Text* serve = Text::getIntance(410, 350, "Press SPACE to serve", 20);
-		Text* lp_move = Text::getIntance(100, 400, "Use W and S to move", 20);
-		Text* rp_move = Text::getIntance(600, 400, "Use arrow UP and arrow DOWN to move", 20);
-		ge.add(title);
-		ge.add(serve);
-		ge.add(lp_move);
-		ge.add(rp_move);
+		if(sys.getOrientation() == "H"){
+			Text* title = Text::getIntance(375, 100, "PONG.", 70);
+			Text* serve = Text::getIntance(350, 350, "Press SPACE to serve", 20);
+			Text* lp_move = Text::getIntance(100, 400, "Use W and S to move", 20);
+			Text* rp_move = Text::getIntance(510, 400, "Use arrow UP and arrow DOWN to move", 20);
+			ge.add(title);
+			ge.add(serve);
+			ge.add(lp_move);
+			ge.add(rp_move);
+		} else {
+			Text* title = Text::getIntance(220, 330, "PONG.", 70);
+			Text* serve = Text::getIntance(210, 530, "Press SPACE to serve", 20);
+			Text* topp_move = Text::getIntance(210, 110, "Use W and S to move", 20);
+			Text* bottomp_move = Text::getIntance(130, 750, "Use arrow UP and arrow DOWN to move", 20);
+			ge.add(title);
+			ge.add(serve);
+			ge.add(topp_move);
+			ge.add(bottomp_move);
+		}
 	}
 
 	void IntroState::updateState() {
@@ -41,7 +51,7 @@ namespace cwing {
 			}
 		} */
 		for (Sprite* s : ge.getSprites()) {
-			if (s->getSpriteType() == "score" || s->getSpriteType() == "text") { 
+			if (s->getSpriteType() == "score" || s->getSpriteType() == "text") {  //??? score ???
 				ge.remove(s);
 			}
 		}
@@ -49,7 +59,9 @@ namespace cwing {
 
 	void IntroState::stateEvents(SDL_Event& event) {
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE) {
-			setNextState(PlayState::getInstance());
+			//std::unique_ptr<GameState> ps = std::make_unique<PlayState>();
+			//setNextState(std::move(ps));
+			setNextState(std::move(PlayState::getInstance()));
 		}
 	}
 
@@ -57,17 +69,15 @@ namespace cwing {
 		//sys.drawSysBG(); //ritar bakgrund, �ndra??
 
 		for (Sprite* s : ge.getSprites()) { 
-			if(s->getSpriteType() != "score"){ // och ball?
+			if(s->getSpriteType() != "score"){ // och s->getSpriteType() != "ball" ??
 				s->draw();
 			}
-/* 			if (Ball* b = dynamic_cast<Ball*>(s)) { // hitta s�tt att kolla om det �r false och inte s� h�r
-				;  
-			} else if (Score* sc = dynamic_cast<Score*>(s)) {
-				;
-			} else {
-				s->draw();
-			} */
 		}
 	}
 
+	IntroState::~IntroState() {
+		//delete nextState;
+		//delete getNextState();
+	}
 }
+
