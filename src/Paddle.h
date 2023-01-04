@@ -20,8 +20,6 @@ namespace cwing {
 		void keyUp(const SDL_Event& eve);
 		void draw();
 		void tick();
-		void horizontalTick();
-		void verticalTick();
 		~Paddle();
 	};
 }

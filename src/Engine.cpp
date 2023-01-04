@@ -2,7 +2,6 @@
 #include "System.h"
 #include "IntroState.h"
 #include <SDL2/SDL.h>
-#include <iostream>
 
 namespace cwing {
 #define FPS 60 //antal frames per sekund. FPS för att kunna styra hastigheten av spelet, samt att hastigheten blir samma på olika datorer
@@ -16,54 +15,40 @@ namespace cwing {
 	}
 
 	void Engine::run() {
-		//GameState* currentState = IntroState::getInstance();
-		//GameState* gState = new GameState();
-		//GameState* currentState = gState->getCurrentState();
-		//currentState = IntroState::getInstance();
 		currentState = std::move(std::make_unique<IntroState>());
 		currentState->enterState();
-		//currentState->setCurrentState(currentState);
-		//currentState->getCurrentState()->enterState();
+
 		quit = false; 
 		Uint32 tInterval = 1000 / FPS; //hur många milisekunder programmet ska dröja mellan ticks
 		while (!quit) {
 			Uint32 nextTick = SDL_GetTicks() + tInterval; //nextTick räknar ur när nästa tick ska vara. SDL_GetTicks() returnerar antal milisekunder sen initieringen utav SDL
 			SDL_Event eve;
-			while (SDL_PollEvent(&eve) != 0) { // != 0 needed?
+			while (SDL_PollEvent(&eve) != 0) { 
 				if (eve.type == SDL_QUIT) {
 					quit = true;
 				}
 				currentState->stateEvents(eve);
-			} //in while
-			//std::cout << removed.size() << std::endl;
+			} 
+		
 			if (quit == true) {
 				for (Sprite* s : sprites) {
 					delete s;
 				}
-				//delete currentState;
 				break;
 			}
 			currentState->updateState();
 			  
 			currentState->changeState();
-			//std::cout << " Out tick: " << SDL_GetTicks() << " " << sprites.size() << std::endl;
 			for (Sprite* s : added) {
-				//std::cout << "tick: " << SDL_GetTicks() << " " << added.size() << std::endl;
 				sprites.push_back(s); //vi överför alla komponenter från added till comps när vi inte längre itererar över den
-				//std::cout << sprites.size() << std::endl;
 			}
 			added.clear(); //rensar vektorn
-			//std::cout << "After added loop " << sprites.size() << std::endl;
-			//std::cout << removed.size() << std::endl;
 			//bara en check
 			for (Sprite* s : removed) {
-				//std::cout << "Should delete" << std::endl;
 				for (std::vector<Sprite*>::iterator i = sprites.begin(); i != sprites.end();) {
 					if (*i == s) { // vi kollar om pekaren c finns i removed vektorn och tar bort den
 						delete *i;
 						i = sprites.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i
-						//delete *i;
-						//i = sprites.erase(i); //i= för att erase() returnerar iterator på det första elementet som är kvar i vektorn, efter i
 					} else {
 						i++; //i++ är i else då vi vill inte öka iteratorn om ett element tas bort
 					}
@@ -76,20 +61,12 @@ namespace cwing {
 			currentState->renderState();
 			//sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
 			SDL_RenderPresent(sys.getRen());
-			//Färg till renderaren
-			//SDL_SetRenderDrawColor(sys.getRen(), 0, 0, 0, 0);
-			//går igenom alla komponenter efter eventet och ritar de i det nya tillståndet. För att rita up llla händelse måste man sudda skärmen först RClear
-			//SDL_RenderClear(sys.getRen());
-			//sys.drawSysBG(); //ritar bakgrund
-			//currentState->renderState();
-			////sen ska man skriva ut, presentera från renderaren till skärmen efter ritningen
-			//SDL_RenderPresent(sys.getRen());
-			//i slutet av loopen, efter allt ritas ut, räknar vi tid kvar till nästa tick
+
 			int delay = nextTick - SDL_GetTicks();
-			if (delay > 0) { // delay är 0 eller negativ om det inte finns någ kvar 
+			if (delay > 0) { // delay är 0 eller negativ om det inte finns nåt kvar 
 				SDL_Delay(delay);
 			} 
-			//std::cout << "getSprites " << sprites.size() << std::endl;
+			
 		}//out while
 	}
 

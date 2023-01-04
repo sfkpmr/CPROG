@@ -9,7 +9,7 @@
 namespace cwing {
 
 	GameOverState::GameOverState(): GameState() {
-		//nextState = IntroState::getInstance();
+
 	}
 
 	std::unique_ptr<GameState> GameOverState::getInstance() {
@@ -17,21 +17,14 @@ namespace cwing {
 	}
 
 	void GameOverState::enterState() {
-		if(sys.getOrientation() == "H"){
-			Sprite* gOver = Text::getIntance(295, 100, "GAME OVER!", 60);
-			Sprite* pAgain = Text::getIntance(310, 450, "Press ESC to Quit", 40);
-			ge.add(gOver);
-			ge.add(pAgain);	
-		} else {
-			Sprite* gOver = Text::getIntance(145, 300, "GAME OVER!", 60);
-			Sprite* pAgain = Text::getIntance(150, 490, "Press ESC to Quit", 40);
-			ge.add(gOver);
-			ge.add(pAgain);
-		}
+		Sprite* gOver = Text::getIntance(295, 100, "GAME OVER!", 60);
+		Sprite* pAgain = Text::getIntance(310, 450, "Press ESC to Quit", 40);
+		ge.add(gOver);
+		ge.add(pAgain);	
 	}
 
 	void GameOverState::updateState() {
-		//std::cout << "GameOver" << std::endl;
+		
 	}
 
 	void GameOverState::exitState() {
@@ -39,15 +32,11 @@ namespace cwing {
 			if(s->getSpriteType() == "text" || s->getSpriteType() == "score"){
 				ge.remove(s);
 			}
-/* 			if (Text* t = dynamic_cast<Text*>(s)) { 
-				ge.remove(t);
-			} */
 		}
 	}
 
 	void GameOverState::stateEvents(SDL_Event& event) {
 		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE) {
-			//std::unique_ptr<GameState> is = std::make_unique<IntroState>();
 			ge.getQuit() = true;
 		}
 	}
@@ -59,7 +48,7 @@ namespace cwing {
 	}
 
 	GameOverState::~GameOverState() {
-		//delete nextState;
+		std::cout << "Game-over state dest" << std::endl;
 	}
 }
 

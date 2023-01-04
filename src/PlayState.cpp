@@ -10,7 +10,7 @@
 namespace cwing {
 
 	PlayState::PlayState(): GameState() {
-		//nextState = GameOverState::getInstance();
+
 	}
 
 	std::unique_ptr<GameState> PlayState::getInstance() {
@@ -18,17 +18,10 @@ namespace cwing {
 	}
 
 	void PlayState::enterState() {
-		if(sys.getOrientation() == "H"){
-			Sprite* score_l = Score::getInstance(390, 15, 40, 2);
-			Sprite* score_r = Score::getInstance(485, 15, 40, 1);
-			ge.add(score_l);
-			ge.add(score_r);
-		} else {
-			Sprite* score_top = Score::getInstance(20, 400, 40, 2);
-		    Sprite* score_bottom = Score::getInstance(560, 460, 40, 1);
-		    ge.add(score_top);
-		    ge.add(score_bottom);
-		}
+		Sprite* score_l = Score::getInstance(390, 15, 40, 2);
+		Sprite* score_r = Score::getInstance(485, 15, 40, 1);
+		ge.add(score_l);
+		ge.add(score_r);
 	}
 
 	void PlayState::updateState() {
@@ -41,12 +34,10 @@ namespace cwing {
 				Score* sc = dynamic_cast<Score*>(s);
 				if(ge.getMaxScore() == 0) {
 					if (sc->getScore() == 5) {
-						//std::unique_ptr<GameState> gos = std::make_unique<GameOverState>();
 						setNextState(std::move(GameOverState::getInstance()));
 					}
 				} else {
 					if (sc->getScore() == ge.getMaxScore()) {
-						//std::unique_ptr<GameState> gos = std::make_unique<GameOverState>();
 						setNextState(std::move(GameOverState::getInstance()));
 					}
 				}
@@ -58,16 +49,6 @@ namespace cwing {
 		for (int i = 0; i < 4; i++) { // fixar paddles går vid game over state, om key blev aldrig upp
 			ge.getKeyStateCheck()[i] = false;
 		}
-		//for (Sprite* s : ge.getSprites()) {
-		//	if (Score* sc = dynamic_cast<Score*>(s)) {
-		//		ge.remove(s);
-		//	}
-		//}
-		//for (Sprite* s : ge.getSprites()) {
-		//	if (Ball* b = dynamic_cast<Ball*>(s)) {
-		//		ge.remove(s);
-		//	}
-		//}
 	}
 
 	void PlayState::stateEvents(SDL_Event& event) {
@@ -90,7 +71,7 @@ namespace cwing {
 	}
 
 	PlayState::~PlayState() {
-		std::cout << "Play dest" << std::endl;
+		std::cout << "Play-state dest" << std::endl;
 	}
 }
 

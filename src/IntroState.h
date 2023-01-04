@@ -10,13 +10,12 @@ namespace cwing {
 	public:
 		IntroState();
 		static std::unique_ptr<GameState> getInstance();
-		//IntroState();
 		void enterState();
 		void updateState();
 		void exitState();
 		void stateEvents(SDL_Event& event);
 		void renderState();
-		~IntroState(); //b inte?
+		~IntroState(); 
 	};
 }
 #endif
