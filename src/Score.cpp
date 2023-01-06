@@ -1,6 +1,7 @@
 #include "Score.h"
 #include "Engine.h"
 #include <string>
+#include <iostream>
 
 namespace cwing {
 	Score::Score(int x, int y, int fontSize, int pID): Text(x, y, "0", fontSize), playerID(pID) {
@@ -25,5 +26,9 @@ namespace cwing {
 
 	const int Score::getScore() const {
 		return score;
+	}
+
+	Score::~Score(){
+		std::cout << "Score dest" << std::endl;
 	}
 }

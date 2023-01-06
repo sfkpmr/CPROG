@@ -5,7 +5,6 @@
 #include "Sprite.h"
 #include "GameState.h"
 
-//huvudsaklig program
 namespace cwing {
 
 	class Engine
@@ -25,7 +24,7 @@ namespace cwing {
 	private:
 		std::vector<Sprite*> sprites; //innehåller sprites som ska behandlas under iterering
 		std::vector<Sprite*> added; //innehåller objekt som adderas före iterering
-		std::vector<Sprite*> removed; //innehåller sprites som tas bort under iterering
+		std::vector<Sprite*> removed; //innehåller sprites som tas bort efter händelseloop
 		std::unique_ptr<GameState> currentState;
 		bool keyStateCheck[4] = {}; 
 		bool scoreCollision[2] = {};

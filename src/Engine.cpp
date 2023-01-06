@@ -39,11 +39,12 @@ namespace cwing {
 			currentState->updateState();
 			  
 			currentState->changeState();
+
 			for (Sprite* s : added) {
 				sprites.push_back(s); //vi överför alla komponenter från added till comps när vi inte längre itererar över den
 			}
 			added.clear(); //rensar vektorn
-			//bara en check
+			
 			for (Sprite* s : removed) {
 				for (std::vector<Sprite*>::iterator i = sprites.begin(); i != sprites.end();) {
 					if (*i == s) { // vi kollar om pekaren c finns i removed vektorn och tar bort den

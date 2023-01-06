@@ -2,8 +2,6 @@
 #include "Text.h"
 #include "Engine.h"
 #include "Sprite.h"
-#include "IntroState.h"
-#include "System.h"
 #include <iostream>
 
 namespace cwing {
@@ -48,7 +46,7 @@ namespace cwing {
 	}
 
 	GameOverState::~GameOverState() {
-		std::cout << "Game-over state dest" << std::endl;
+		std::cout << "GameOverState dest" << std::endl;
 	}
 }
 

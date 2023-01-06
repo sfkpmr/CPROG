@@ -37,7 +37,7 @@ namespace cwing{
 	}
 
     Speedup::~Speedup(){
-        std::cout << "SU dest" << std::endl;
+        std::cout << "Speedup dest" << std::endl;
         SDL_DestroyTexture(texture);
     }
 }

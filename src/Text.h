@@ -21,7 +21,7 @@ namespace cwing{
 		void draw();
 		void setText(std::string nText);
 		virtual void tick(){}
-		~Text();
+		virtual ~Text();
 	};
 }
 #endif 

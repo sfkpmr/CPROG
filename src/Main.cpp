@@ -14,7 +14,6 @@
 using namespace cwing;
 
 int main(int argc, char** argv) {
-	//horizontal setup
 	//normal game sprites 
 	ge.setMaxScore(7); //sets the desired max score (5 per default)
 	Sprite* ball = Ball::getInstance(437, 275, 25, 25, 13);

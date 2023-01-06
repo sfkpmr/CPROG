@@ -6,8 +6,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace cwing {
-	
+namespace cwing {	
 	Ball::Ball(int x, int y, int w, int h, int speed) : MovableSprite(x, y, w, h, speed) { 
 		texture = IMG_LoadTexture(sys.getRen(), (constants::gResPath + "pong_ball.png").c_str());
 		velocityX = getSpeed(); 
@@ -27,12 +26,12 @@ namespace cwing {
 		for (Sprite* s : ge.getSprites()) {
 			if (s->getSpriteType() == "paddle") { 
 				Paddle* p = dynamic_cast<Paddle*>(s);
-				paddleBounceAngleH(p);
+				paddleBounceAngle(p);
 			}
 		}	
 	}
 
-	void Ball::paddleBounceAngleH(Paddle* p){
+	void Ball::paddleBounceAngle(Paddle* p){
 		if (p->getPlayerID() == 1) {
 			if (SDL_HasIntersection(&getRect(), &(p->getRect()))) {
 				double relativeY = (p->getRect().y + (p->getRect().h / 2)) - (getRect().y + (getRect().h / 2)); 
@@ -74,7 +73,7 @@ namespace cwing {
 			sys.playSfx("score4416.wav");
 			ge.remove(this); 
 			resetSpeed();
-			Ball* b = Ball::getInstance(437, 275, 25, 25, getSpeed());
+			Ball* b = Ball::getInstance(437, 275, 25, 25, getSpeed()); 
 			b->getVelocityX() = -getSpeed();
 			ge.add(b);				
 		} else if (getRect().x <= 0) {
@@ -94,6 +93,10 @@ namespace cwing {
 
 		getRect().x += velocityX;
 		getRect().y += velocityY;
+	}
+
+	double& Ball::getVelocityX() {
+		return velocityX;
 	}
 
 	Ball::~Ball() {

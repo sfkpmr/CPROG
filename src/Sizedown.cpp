@@ -11,7 +11,7 @@ namespace cwing{
         setSpriteType("sizedown");
     }
 
-    Sizedown* Sizedown::getInstance(int x, int y, int w, int h){ //tillåter inte värdesemantik. Konstruktor private.
+    Sizedown* Sizedown::getInstance(int x, int y, int w, int h){ 
         return new Sizedown(x,y,w,h);
     }
 
@@ -36,7 +36,7 @@ namespace cwing{
     }
 
     Sizedown::~Sizedown(){
-        std::cout << "SD dest" << std::endl;
+        std::cout << "Sizedown dest" << std::endl;
         SDL_DestroyTexture(texture);
     }
 }

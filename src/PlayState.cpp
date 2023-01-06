@@ -1,9 +1,7 @@
 #include "PlayState.h"
 #include "Sprite.h"
-#include "Ball.h"
 #include "Score.h"
 #include "Engine.h"
-#include "System.h"
 #include "GameOverState.h"
 #include <iostream>
 
@@ -46,7 +44,7 @@ namespace cwing {
 	}
 
 	void PlayState::exitState() {
-		for (int i = 0; i < 4; i++) { // fixar paddles går vid game over state, om key blev aldrig upp
+		for (int i = 0; i < 4; i++) { // fixar paddles går vid game over state, om key blev aldrig släppt
 			ge.getKeyStateCheck()[i] = false;
 		}
 	}
@@ -71,7 +69,7 @@ namespace cwing {
 	}
 
 	PlayState::~PlayState() {
-		std::cout << "Play-state dest" << std::endl;
+		std::cout << "PlayState dest" << std::endl;
 	}
 }
 

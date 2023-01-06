@@ -3,8 +3,7 @@
 #include "Sprite.h"
 
 namespace cwing {
-	class MovableSprite: public Sprite
-	{
+	class MovableSprite : public Sprite	{
 	private:
 		int speed, oldSpeed;
 	protected:

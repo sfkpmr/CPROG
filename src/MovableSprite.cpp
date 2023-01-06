@@ -1,6 +1,5 @@
 #include "MovableSprite.h"
 #include "Sprite.h"
-#include "System.h"
 #include <iostream>
 
 namespace cwing {
@@ -22,7 +21,7 @@ namespace cwing {
 	}
 		
 	MovableSprite::~MovableSprite() {
-		std::cout << "MS dest anropas" << std::endl;
+		std::cout << "MovableSprite dest anropas" << std::endl;
 	}
 }
 

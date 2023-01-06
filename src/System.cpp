@@ -3,7 +3,6 @@
 #include <iostream>
 
 namespace cwing {
-
 	System::System() {
 		SDL_Init(SDL_INIT_EVERYTHING);
 		width = 900;
@@ -18,7 +17,7 @@ namespace cwing {
 	}
 
 	System::~System() {
-		std::cout << "Sys dest" << std::endl;
+		std::cout << "System dest" << std::endl;
 		SDL_DestroyWindow(win);
 		SDL_DestroyRenderer(ren);
 		SDL_DestroyTexture(tex);

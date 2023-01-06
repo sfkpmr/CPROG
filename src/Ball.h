@@ -15,11 +15,10 @@ private:
 public:
 	static Ball* getInstance(int x, int y, int w, int h, int speed);
 	void paddleCollision();
-	void paddleBounceAngleH(Paddle* p);
+	void paddleBounceAngle(Paddle* p);
 	void tick();
 	void draw();
-	double& getVelocityX() { return velocityX; }
-	double& getVelocityY() { return velocityY; }
+	double& getVelocityX();
 	~Ball();
 };
 }

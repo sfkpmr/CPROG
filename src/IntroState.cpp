@@ -1,10 +1,7 @@
 #include "IntroState.h"
-#include "System.h"
 #include "Sprite.h"
 #include "Engine.h"
-#include "Ball.h"
 #include "Text.h"
-#include "Score.h"
 #include "PlayState.h"
 #include <iostream>
 
@@ -19,10 +16,10 @@ namespace cwing {
 	}
 
 	void IntroState::enterState() {
-		Text* title = Text::getIntance(375, 100, "PONG.", 70);
-		Text* serve = Text::getIntance(350, 350, "Press SPACE to serve", 20);
-		Text* lp_move = Text::getIntance(100, 400, "Use W and S to move", 20);
-		Text* rp_move = Text::getIntance(510, 400, "Use arrow UP and arrow DOWN to move", 20);
+		Sprite* title = Text::getIntance(375, 100, "PONG.", 70);
+		Sprite* serve = Text::getIntance(350, 350, "Press SPACE to serve", 20);
+		Sprite* lp_move = Text::getIntance(100, 400, "Use W and S to move", 20);
+		Sprite* rp_move = Text::getIntance(510, 400, "Use arrow UP and arrow DOWN to move", 20);
 		ge.add(title);
 		ge.add(serve);
 		ge.add(lp_move);
@@ -30,12 +27,12 @@ namespace cwing {
 	}
 
 	void IntroState::updateState() {
-		//std::cout << "Intro" << std::endl;
+		
 	}
 
 	void IntroState::exitState() {
 		for (Sprite* s : ge.getSprites()) {
-			if (s->getSpriteType() == "score" || s->getSpriteType() == "text") {  
+			if (s->getSpriteType() == "text") { 
 				ge.remove(s);
 			}
 		}
@@ -48,17 +45,15 @@ namespace cwing {
 	}
 
 	void IntroState::renderState() {
-		//sys.drawSysBG(); //ritar bakgrund, �ndra??
-
 		for (Sprite* s : ge.getSprites()) { 
-			if(s->getSpriteType() != "score"){ // och s->getSpriteType() != "ball" ??
+			if(s->getSpriteType() != "score"){ 
 				s->draw();
 			}
 		}
 	}
 
 	IntroState::~IntroState() {
-		std::cout << "Intro-state dest" << std::endl;
+		std::cout << "IntroState dest" << std::endl;
 	}
 }
 

@@ -16,7 +16,7 @@ namespace cwing {
 		void exitState();
 		void stateEvents(SDL_Event& event);
 		void renderState();
-		~GameOverState(); // b inte?
+		~GameOverState(); 
 	};
 }
 #endif
